@@ -27,7 +27,7 @@ const Services: React.FC = () => {
       title: 'Companionship and Emotional Support',
       icon: Users,
       description: 'Social connection and engagement are essential for seniors\' mental, emotional, and physical health. Our caregivers provide meaningful companionship to reduce feelings of stress, loneliness, and depression, while encouraging cognitive stimulation and overall well-being. Caregivers tailor activities to each individual\'s preferences and needs, helping seniors feel valued, engaged, and connected.',
-      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800',
+      image: 'https://images.pexels.com/photos/7551667/pexels-photo-7551667.jpeg',
       details: [
         'Engaging in conversation and sharing stories',
         'Playing games, puzzles, and memory-boosting activities',
@@ -43,7 +43,7 @@ const Services: React.FC = () => {
       title: 'Personal Care Services',
       icon: Heart,
       description: 'Our caregivers assist seniors with daily personal care tasks to ensure they maintain dignity, comfort, and independence in their own homes. Care is tailored to each individual\'s needs, providing support while respecting their privacy and preferences.',
-      image: 'https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=800',
+      image: 'https://images.pexels.com/photos/7551677/pexels-photo-7551677.jpeg',
       details: [
         'Bathing, showering, and general hygiene',
         'Dressing and grooming assistance',
@@ -60,7 +60,7 @@ const Services: React.FC = () => {
       title: 'Respite Care',
       icon: Clock,
       description: 'Caring for a loved one can be rewarding, but it can also be physically and emotionally exhausting. Respite care provides family caregivers with temporary relief, allowing them to rest, recharge, and maintain balance in their own lives. Our caregivers step in to provide compassionate, reliable support, ensuring your loved one continues to receive excellent care.',
-      image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800',
+      image: 'https://images.pexels.com/photos/7551683/pexels-photo-7551683.jpeg',
       details: [
         'Short-term or scheduled in-home care',
         'Assistance with personal care, grooming, and hygiene',
@@ -76,7 +76,7 @@ const Services: React.FC = () => {
       title: 'Dementia Care Support',
       icon: Brain,
       description: 'Caring for someone with memory loss requires understanding, patience, and specialized attention. Early stages may involve gentle reminders for daily tasks, personal hygiene, or medication. As dementia progresses, clients may need more hands-on support, and behavioral changes can be challenging for family members to manage. Our experienced caregivers provide compassionate care tailored to each individual, combining personal care, homemaking, and companionship with specialized support.',
-      image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800',
+      image: 'https://images.pexels.com/photos/7345452/pexels-photo-7345452.jpeg',
       details: [
         'Reintroducing themselves at each visit to provide comfort and familiarity',
         'Preparing meals that are easy to manage for those with utensil or swallowing difficulties',
@@ -90,7 +90,7 @@ const Services: React.FC = () => {
       title: 'Post-Surgery Care Support',
       icon: Activity,
       description: 'Recovering at home after surgery can be challenging, requiring careful attention and assistance to ensure safety and a smooth recovery. Our caregivers provide compassionate support to help seniors regain strength and independence while reducing stress on family members. In addition to personal care, homemaking, and companionship, post-surgery care includes:',
-      image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=800',
+      image: 'https://images.pexels.com/photos/18271866/pexels-photo-18271866.jpeg',
       details: [
         'Assistance with mobility and transfers to prevent falls',
         'Support with daily activities such as bathing, dressing, and grooming',
@@ -105,7 +105,7 @@ const Services: React.FC = () => {
       title: 'Alzheimer\'s Care Support',
       icon: Brain,
       description: 'Caring for someone with Alzheimer\'s requires patience, understanding, and a gentle approach to daily routines. Our caregivers provide personalized assistance to maintain safety, comfort, and dignity. Alongside personal care, homemaking, and companionship, Alzheimer\'s care includes:',
-      image: 'https://images.unsplash.com/photo-1595423429293-c0fca8876ff6?w=800',
+      image: 'https://images.pexels.com/photos/7345460/pexels-photo-7345460.jpeg',
       details: [
         'Guiding daily activities and maintaining structured routines',
         'Offering memory stimulation exercises to engage cognitive function',
@@ -120,7 +120,7 @@ const Services: React.FC = () => {
       title: 'Parkinson\'s Disease Care',
       icon: Activity,
       description: 'Living with Parkinson\'s disease can affect mobility, balance, and daily functioning, making everyday tasks more challenging. Our caregivers provide compassionate support that helps seniors maintain independence while ensuring safety and comfort. In addition to personal care, homemaking, and companionship, Parkinson\'s care includes:',
-      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800',
+      image: 'https://images.pexels.com/photos/7345459/pexels-photo-7345459.jpeg',
       details: [
         'Assisting with walking, transfers, and mobility exercises to reduce the risk of falls',
         'Helping with daily activities such as dressing, grooming, and eating',
@@ -134,7 +134,7 @@ const Services: React.FC = () => {
       title: 'Chronic Illness Care',
       icon: Shield,
       description: 'Managing a chronic illness at home can be challenging, requiring daily attention to medications, routines, and lifestyle adjustments. Our caregivers provide compassionate support to help seniors maintain their health and independence. In addition to personal care, homemaking, and companionship, chronic illness care includes:',
-      image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800',
+      image: 'https://images.pexels.com/photos/8949917/pexels-photo-8949917.jpeg',
       details: [
         'Medication reminders and adherence monitoring',
         'Assistance with daily activities such as bathing, dressing, and mobility',
