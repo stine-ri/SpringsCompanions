@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Plus, Minus, HelpCircle, ChevronRight, Phone } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -32,9 +32,9 @@ const FAQ = () => {
       answer: "We offer flexible scheduling to accommodate various needs. Our services can range from a few hours per week for companionship to 24/7 live-in care. During your free consultation, we'll discuss your specific requirements and create a care plan that works for you."
     },
     {
-      question: "Do you accept insurance or Medicare/Medicaid?",
-      answer: "We work with various payment options including long-term care insurance, veteran's benefits, and private pay. While Medicare typically doesn't cover non-medical home care, we can help you explore other funding options. Contact us to discuss your specific insurance situation."
-    },
+  question: "What payment methods do you accept?",
+  answer: "We accept various convenient payment methods including credit cards, debit cards, electronic bank transfers, and private pay. We also work with veteran's benefits and long-term care insurance. We do not accept traditional health insurance or Medicare/Medicaid for our non-medical home care services. Contact us to discuss which payment option works best for your situation."
+},
     {
       question: "How quickly can care services begin?",
       answer: "We understand that care needs can arise suddenly. In many cases, we can arrange for care to begin within 24-48 hours of your initial consultation. For immediate or emergency care needs, please call us directly and we'll do our best to accommodate you as quickly as possible."
@@ -78,12 +78,12 @@ const FAQ = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
             <HelpCircle className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-16 xl:h-16 text-teal-300 flex-shrink-0" />
-            <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold text-center text-white drop-shadow-lg animate-fadeInDown leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-white drop-shadow-lg animate-fadeInDown leading-tight">
               FREQUENTLY ASKED QUESTIONS
             </h1>
           </div>
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-base sm:text-lg lg:text-xl xl:text-3xl leading-relaxed sm:leading-loose drop-shadow-md animate-fadeInUp text-teal-100">
+            <p className="text-base sm:text-lg leading-relaxed drop-shadow-md animate-fadeInUp text-teal-100">
               Find answers to common questions about our care services
             </p>
           </div>
@@ -91,7 +91,7 @@ const FAQ = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-10 sm:py-12 lg:py-16 xl:py-20">
+      <section className="py-10 sm:py-12 lg:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-3 sm:space-y-4">
             {faqs.map((faq, index) => (
@@ -103,14 +103,14 @@ const FAQ = () => {
                   onClick={() => toggleFaq(index)}
                   className="w-full flex items-center justify-between p-4 sm:p-6 lg:p-8 text-left hover:bg-teal-50 transition-colors group"
                 >
-                  <h3 className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900 pr-3 sm:pr-4 group-hover:text-teal-700 transition leading-relaxed">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 pr-3 sm:pr-4 group-hover:text-teal-700 transition leading-relaxed">
                     {faq.question}
                   </h3>
                   <div className="flex-shrink-0 ml-2 sm:ml-0">
                     {openIndex === index ? (
-                      <Minus className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-teal-600" />
+                      <Minus className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" />
                     ) : (
-                      <Plus className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-gray-400 group-hover:text-teal-600 transition" />
+                      <Plus className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 group-hover:text-teal-600 transition" />
                     )}
                   </div>
                 </button>
@@ -124,7 +124,7 @@ const FAQ = () => {
                 >
                   <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8">
                     <div className="border-t border-gray-200 pt-4 sm:pt-6">
-                      <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-700 leading-relaxed sm:leading-loose">
+                      <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                         {faq.answer}
                       </p>
                     </div>
@@ -135,27 +135,27 @@ const FAQ = () => {
           </div>
 
           {/* Contact CTA */}
-          <div className="mt-10 sm:mt-12 lg:mt-14 xl:mt-16 bg-gradient-to-br from-teal-600 to-teal-800 rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10 xl:p-12 text-center">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight">
+          <div className="mt-10 sm:mt-12 lg:mt-14 bg-gradient-to-br from-teal-600 to-teal-800 rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 leading-tight">
               Still Have Questions?
             </h2>
-            <p className="text-sm sm:text-base lg:text-lg xl:text-2xl text-teal-100 mb-6 sm:mb-8 leading-relaxed sm:leading-loose">
+            <p className="text-sm sm:text-base text-teal-100 mb-6 sm:mb-8 leading-relaxed">
               We're here to help! Contact us today for personalized assistance.
             </p>
             <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 justify-center">
               <a
                 href="tel:8174496668"
-                className="bg-white text-teal-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-all font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2 sm:gap-3"
+                className="bg-white text-teal-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-gray-100 transition-all font-bold text-sm sm:text-base shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2 sm:gap-3"
               >
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                 Call Us: (817) 449-6668
               </a>
               <a
                 href="/contact"
-                className="bg-teal-900 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl hover:bg-teal-950 transition-all font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2 sm:gap-3"
+                className="bg-teal-900 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-teal-950 transition-all font-bold text-sm sm:text-base shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2 sm:gap-3"
               >
                 Contact Us
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
             </div>
           </div>

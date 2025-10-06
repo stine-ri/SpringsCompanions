@@ -88,17 +88,17 @@ const AboutUs: React.FC = () => {
     }
   ];
 
-  const cities = ["Arlington", "Dallas", "Houston", "San Antonio", "Austin"];
+  const cities = ["Arlington", "Dallas", "Houston", "San Antonio", "Austin", "Fort Worth"];
 
   const renderSectionContent = () => {
     switch(activeSection) {
       case 'about-us':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               About Springs Companions
             </h2>
-            <div className="space-y-4 sm:space-y-6 text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed">
+            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
               <p>
                 Springs Companions offers compassionate in-home senior care for those who wish to age gracefully and comfortably in the place they love most — their own homes. With a strong foundation built on integrity, respect, and empathy, we focus on building meaningful connections with every senior and family we serve.
               </p>
@@ -118,15 +118,15 @@ const AboutUs: React.FC = () => {
       case 'our-story':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               Our Story — Inspired by Compassion
             </h2>
-            <div className="space-y-4 sm:space-y-6 text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed">
+            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
               <p>
                 Springs Companions was founded out of a simple yet powerful realization: too many seniors face life's later years without the support they deserve. Our founder, moved by personal experiences witnessing the struggles of elderly neighbors and family members, felt a calling to create something different — a care service that goes beyond tasks and truly values the person behind them.
               </p>
               <div className="bg-teal-50 p-6 sm:p-8 lg:p-12 rounded-2xl lg:rounded-3xl border-l-4 border-teal-600 shadow-lg my-6 sm:my-8">
-                <p className="italic text-gray-800">
+                <p className="italic text-gray-800 text-base sm:text-lg lg:text-xl">
                   "I saw how isolation, memory loss, and physical limitations made life harder for seniors, and how families often felt overwhelmed trying to provide care on their own. I knew something had to change. That's when Springs Companions was born — not just as a service, but as a mission to bring dignity, comfort, and joy to every senior we touch."
                 </p>
               </div>
@@ -140,30 +140,30 @@ const AboutUs: React.FC = () => {
       case 'vision-mission':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
               Vision & Mission
             </h2>
             <div className="space-y-6 sm:space-y-8">
-              <div className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 lg:p-12 xl:p-14 rounded-2xl lg:rounded-3xl shadow-xl border-2 border-teal-100">
+              <div className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 lg:p-12 rounded-2xl lg:rounded-3xl shadow-xl border-2 border-teal-100">
                 <div className="flex items-center gap-4 sm:gap-5 mb-4 sm:mb-6">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Lightbulb size={28} className="text-white sm:w-8 sm:h-8 lg:w-10 lg:h-10" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Lightbulb size={24} className="text-white sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900">Our Vision</h3>
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Our Vision</h3>
                 </div>
-                <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed italic">
+                <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed italic">
                   "To create a safe, compassionate, and empowering environment where seniors can live with dignity, independence, and joy in the comfort of their own homes."
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 lg:p-12 xl:p-14 rounded-2xl lg:rounded-3xl shadow-xl border-2 border-teal-100">
+              <div className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 lg:p-12 rounded-2xl lg:rounded-3xl shadow-xl border-2 border-teal-100">
                 <div className="flex items-center gap-4 sm:gap-5 mb-4 sm:mb-6">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Target size={28} className="text-white sm:w-8 sm:h-8 lg:w-10 lg:h-10" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Target size={24} className="text-white sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900">Our Mission</h3>
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Our Mission</h3>
                 </div>
-                <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed italic">
+                <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed italic">
                   "To deliver personalized, professional, and reliable in-home care that enhances the safety, comfort, and overall well-being of seniors while supporting their families."
                 </p>
               </div>
@@ -174,18 +174,18 @@ const AboutUs: React.FC = () => {
       case 'objectives':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
               Our Objectives
             </h2>
             <div className="space-y-4 sm:space-y-6">
               {objectives.map((objective, index) => {
                 const Icon = objective.icon;
                 return (
-                  <div key={index} className="flex items-start gap-4 sm:gap-6 p-5 sm:p-6 lg:p-8 xl:p-10 rounded-2xl lg:rounded-3xl bg-white shadow-lg hover:shadow-xl transition-all border-l-4 border-teal-600">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Icon size={24} className="text-teal-700 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
+                  <div key={index} className="flex items-start gap-4 sm:gap-6 p-5 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl bg-white shadow-lg hover:shadow-xl transition-all border-l-4 border-teal-600">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Icon size={20} className="text-teal-700 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
                     </div>
-                    <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed">{objective.text}</p>
+                    <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">{objective.text}</p>
                   </div>
                 );
               })}
@@ -196,17 +196,17 @@ const AboutUs: React.FC = () => {
       case 'values':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
               Our Values
             </h2>
             <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
               {values.map((value, index) => (
                 <div key={index} className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 lg:p-10 rounded-2xl lg:rounded-3xl shadow-xl border-2 border-teal-100 hover:shadow-2xl transition-all">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                    <Heart size={28} className="text-white sm:w-8 sm:h-8 lg:w-10 lg:h-10" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                    <Heart size={24} className="text-white sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 text-center">{value.title}</h3>
-                  <p className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-600 leading-relaxed text-center">{value.description}</p>
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 text-center">{value.title}</h3>
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed text-center">{value.description}</p>
                 </div>
               ))}
             </div>
@@ -216,21 +216,21 @@ const AboutUs: React.FC = () => {
       case 'commitment':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               Our Commitment to Caregivers
             </h2>
-            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed mb-8 sm:mb-12">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed mb-8 sm:mb-12">
               We recognize that caregivers are the backbone of quality home care.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <div className="bg-teal-50 p-6 sm:p-8 lg:p-10 rounded-2xl lg:rounded-3xl shadow-lg border-2 border-teal-200">
-                <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold text-gray-800 leading-relaxed text-center">Ongoing training and skill development</p>
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 leading-relaxed text-center">Ongoing training and skill development</p>
               </div>
               <div className="bg-teal-50 p-6 sm:p-8 lg:p-10 rounded-2xl lg:rounded-3xl shadow-lg border-2 border-teal-200">
-                <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold text-gray-800 leading-relaxed text-center">Recognition and appreciation of our care professionals</p>
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 leading-relaxed text-center">Recognition and appreciation of our care professionals</p>
               </div>
               <div className="bg-teal-50 p-6 sm:p-8 lg:p-10 rounded-2xl lg:rounded-3xl shadow-lg border-2 border-teal-200 sm:col-span-2 lg:col-span-1">
-                <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold text-gray-800 leading-relaxed text-center">Resources to deliver the best care to seniors</p>
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 leading-relaxed text-center">Resources to deliver the best care to seniors</p>
               </div>
             </div>
           </div>
@@ -239,17 +239,17 @@ const AboutUs: React.FC = () => {
       case 'local-impact':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               Our Local Impact
             </h2>
-            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed mb-8 sm:mb-12">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed mb-8 sm:mb-12">
               Springs Companions is proud to serve families across Texas with professional expertise and deep community connections.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {cities.map((city, index) => (
                 <div key={index} className="flex items-center gap-3 sm:gap-4 bg-gradient-to-br from-teal-50 to-white px-5 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 rounded-xl lg:rounded-2xl border-2 border-teal-200 shadow-lg hover:shadow-xl transition-all">
-                  <MapPin size={24} className="text-teal-700 flex-shrink-0 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
-                  <span className="font-bold text-gray-700 text-lg sm:text-xl lg:text-2xl xl:text-3xl">{city}</span>
+                  <MapPin size={20} className="text-teal-700 flex-shrink-0 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
+                  <span className="font-bold text-gray-700 text-base sm:text-lg lg:text-xl">{city}</span>
                 </div>
               ))}
             </div>
@@ -259,7 +259,7 @@ const AboutUs: React.FC = () => {
       case 'why-choose':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
               Why Choose Springs Companions
             </h2>
             <div className="space-y-4 sm:space-y-6">
@@ -271,26 +271,26 @@ const AboutUs: React.FC = () => {
                 "Services across multiple Texas cities"
               ].map((item, index) => (
                 <div key={index} className="flex items-start gap-4 sm:gap-6 p-5 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl bg-white shadow-lg hover:shadow-xl transition-all border-l-4 border-teal-600">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <ChevronRight size={18} className="text-white sm:w-6 sm:h-6" />
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <ChevronRight size={14} className="text-white sm:w-5 sm:h-5" />
                   </div>
-                  <span className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed">{item}</span>
+                  <span className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-8 sm:mt-12 p-6 sm:p-8 lg:p-12 xl:p-14 bg-gradient-to-br from-teal-600 to-teal-700 rounded-2xl lg:rounded-3xl shadow-2xl text-white">
-              <h4 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-5">
+            <div className="mt-8 sm:mt-12 p-6 sm:p-8 lg:p-12 bg-gradient-to-br from-teal-600 to-teal-700 rounded-2xl lg:rounded-3xl shadow-2xl text-white">
+              <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-5">
                 Ready to Get Started?
               </h4>
-              <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl mb-6 sm:mb-8 lg:mb-10 leading-relaxed text-teal-50">
+              <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 lg:mb-10 leading-relaxed text-teal-50">
                 Contact us today for a free consultation and discover how we can support your loved one.
               </p>
               <a
                 href="/contact"
-                className="inline-flex items-center gap-3 sm:gap-4 bg-white text-teal-700 px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-7 rounded-full hover:bg-teal-50 transition-all font-bold text-lg sm:text-xl lg:text-2xl xl:text-3xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
+                className="inline-flex items-center gap-3 sm:gap-4 bg-white text-teal-700 px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-7 rounded-full hover:bg-teal-50 transition-all font-bold text-base sm:text-lg lg:text-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
               >
                 Schedule Free Consultation
-                <ChevronRight size={24} className="sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
+                <ChevronRight size={20} className="sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
               </a>
             </div>
           </div>
@@ -299,10 +299,10 @@ const AboutUs: React.FC = () => {
       case 'testimonials':
         return (
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               What Families Say About Us
             </h2>
-            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-600 mb-8 sm:mb-12 leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-8 sm:mb-12 leading-relaxed">
               Real experiences from real families we've had the honor to serve
             </p>
             <div className="space-y-6 sm:space-y-8">
@@ -310,15 +310,15 @@ const AboutUs: React.FC = () => {
                 <div key={index} className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 lg:p-12 rounded-2xl lg:rounded-3xl shadow-xl border-2 border-teal-100">
                   <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} size={20} className="fill-yellow-400 text-yellow-400 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
+                      <Star key={i} size={18} className="fill-yellow-400 text-yellow-400 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
                     ))}
                   </div>
-                  <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 mb-6 sm:mb-8 italic leading-relaxed">
+                  <p className="text-base sm:text-lg lg:text-xl text-gray-700 mb-6 sm:mb-8 italic leading-relaxed">
                     "{testimonial.text}"
                   </p>
                   <div className="border-t-2 border-teal-200 pt-4 sm:pt-6">
-                    <p className="font-bold text-gray-900 text-xl sm:text-2xl lg:text-3xl">{testimonial.name}</p>
-                    <p className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-600">{testimonial.location}</p>
+                    <p className="font-bold text-gray-900 text-lg sm:text-xl lg:text-2xl">{testimonial.name}</p>
+                    <p className="text-sm sm:text-base lg:text-lg text-gray-600">{testimonial.location}</p>
                   </div>
                 </div>
               ))}
@@ -465,10 +465,10 @@ const AboutUs: React.FC = () => {
         {/* Introduction Text Section */}
         <section className="bg-white py-12 sm:py-16 lg:py-20 xl:py-24">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed text-center mb-6 sm:mb-8 lg:mb-10">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed text-center mb-6 sm:mb-8 lg:mb-10">
               Springs Companions provides compassionate and affordable in-home senior care, elderly care, and assisted living support. We are dedicated to providing <span className="font-bold text-teal-700">peace of mind for you and your family</span>.
             </p>
-            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-700 leading-relaxed text-center">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed text-center">
               Our caregivers help seniors maintain independence while living in the comfort of their own homes. We understand that inviting a caregiver into your home is a big decision, and we're here to support you every step of the way.
             </p>
           </div>
@@ -481,16 +481,16 @@ const AboutUs: React.FC = () => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden mx-4 sm:mx-6 mb-4 sm:mb-6 bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg flex items-center justify-between text-teal-700 font-bold text-lg sm:text-2xl border-2 border-teal-200 hover:bg-teal-50 transition-all"
+              className="lg:hidden mx-4 sm:mx-6 mb-4 sm:mb-6 bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg flex items-center justify-between text-teal-700 font-bold text-base sm:text-xl border-2 border-teal-200 hover:bg-teal-50 transition-all"
             >
               <span>About Sections</span>
-              <ChevronRight className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-90' : ''}`} size={24} />
+              <ChevronRight className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-90' : ''}`} size={20} />
             </button>
 
             {/* Sidebar - Sticky on desktop, collapsible on mobile */}
             <aside className={`lg:block ${isMobileMenuOpen ? 'block' : 'hidden'} w-full lg:w-[320px] xl:w-[400px] bg-white lg:shadow-2xl`}>
               <div className="lg:sticky lg:top-[116px] p-4 sm:p-6 lg:p-8 xl:p-10">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 lg:mb-8 pb-4 lg:pb-5 border-b-4 border-teal-600">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-6 lg:mb-8 pb-4 lg:pb-5 border-b-4 border-teal-600">
                   Learn About Us
                 </h3>
                 <nav className="space-y-2 lg:space-y-3">
@@ -507,8 +507,8 @@ const AboutUs: React.FC = () => {
                             : 'text-gray-700 hover:bg-teal-50 hover:text-teal-700 hover:shadow-md'
                         }`}
                       >
-                        <SectionIcon size={24} className="flex-shrink-0 lg:w-7 lg:h-7" />
-                        <span className="font-semibold text-base sm:text-lg lg:text-xl leading-snug">
+                        <SectionIcon size={20} className="flex-shrink-0 lg:w-6 lg:h-6" />
+                        <span className="font-semibold text-sm sm:text-base lg:text-lg leading-snug">
                           {section.title}
                         </span>
                       </button>

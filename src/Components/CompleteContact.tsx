@@ -16,15 +16,17 @@ const Contact = () => {
   });
   
   const phoneNumber = "8174496668";
+  const alternativeNumber = "+14699655019";
   const email = "info@springcompanions.us";
   const whatsappNumber = "18174496668";
   
   const areasServed = [
-    { name: 'Arlington', color: 'bg-teal-500' },
-    { name: 'Dallas', color: 'bg-teal-600' },
-    { name: 'Houston', color: 'bg-teal-700' },
-    { name: 'San Antonio', color: 'bg-teal-800' },
-    { name: 'Austin', color: 'bg-teal-900' }
+     { name: 'Arlington', color: 'bg-teal-500' },
+  { name: 'Dallas', color: 'bg-teal-600' },
+  { name: 'Fort Worth', color: 'bg-teal-700' },
+  { name: 'Houston', color: 'bg-teal-800' },
+  { name: 'San Antonio', color: 'bg-teal-900' },
+  { name: 'Austin', color: 'bg-teal-950' },
   ];
 
   const handleScheduleClick = () => {
@@ -102,7 +104,7 @@ ${formData.message}
       <Navbar />
       
       {/* Hero Section with Quote */}
-      <section className="relative text-white py-24 sm:py-32 lg:py-40 mt-20 overflow-hidden">
+      <section className="relative text-white py-20 sm:py-24 lg:py-28 mt-20 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -121,14 +123,14 @@ ${formData.message}
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-center mb-10 lg:mb-14 text-white drop-shadow-lg animate-fadeInDown">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 lg:mb-10 text-white drop-shadow-lg animate-fadeInDown">
             GET IN TOUCH
           </h1>
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-xl sm:text-2xl lg:text-4xl italic leading-relaxed font-light drop-shadow-md animate-fadeInUp">
+            <p className="text-lg sm:text-xl lg:text-2xl italic leading-relaxed font-light drop-shadow-md animate-fadeInUp">
               "Caring for those who once cared for us is one of the highest honors."
             </p>
-            <p className="text-lg sm:text-xl lg:text-2xl mt-4 text-teal-200 animate-fadeInUp">
+            <p className="text-base sm:text-lg lg:text-xl mt-4 text-teal-200 animate-fadeInUp">
               – Tia Walker
             </p>
           </div>
@@ -136,18 +138,18 @@ ${formData.message}
       </section>
 
       {/* Main Content Section */}
-      <section className="py-12 sm:py-16 lg:py-20">
+      <section className="py-10 sm:py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Form */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 lg:mb-8">
+            <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
                 Get In Touch
               </h2>
               
-              <div className="space-y-5 lg:space-y-6">
+              <div className="space-y-4 lg:space-y-5">
                 <div>
-                  <label className="block text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 mb-2">
+                  <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                     Name *
                   </label>
                   <input
@@ -155,12 +157,12 @@ ${formData.message}
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-lg sm:text-xl lg:text-2xl border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+                    className="w-full px-4 py-3 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 mb-2">
+                  <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                     Email *
                   </label>
                   <input
@@ -168,12 +170,12 @@ ${formData.message}
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-lg sm:text-xl lg:text-2xl border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+                    className="w-full px-4 py-3 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 mb-2">
+                  <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                     Phone *
                   </label>
                   <input
@@ -181,12 +183,12 @@ ${formData.message}
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-lg sm:text-xl lg:text-2xl border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+                    className="w-full px-4 py-3 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 mb-2">
+                  <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                     Alternate Phone
                   </label>
                   <input
@@ -194,19 +196,19 @@ ${formData.message}
                     name="alternatePhone"
                     value={formData.alternatePhone}
                     onChange={handleInputChange}
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-lg sm:text-xl lg:text-2xl border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+                    className="w-full px-4 py-3 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 mb-2">
+                  <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                     Best Time To Call
                   </label>
                   <select
                     name="bestTime"
                     value={formData.bestTime}
                     onChange={handleInputChange}
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-lg sm:text-xl lg:text-2xl border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition bg-white"
+                    className="w-full px-4 py-3 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition bg-white"
                   >
                     <option>9:00-10:00am</option>
                     <option>10:00-11:00am</option>
@@ -219,7 +221,7 @@ ${formData.message}
                 </div>
 
                 <div>
-                  <label className="block text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 mb-2">
+                  <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                     Message *
                   </label>
                   <textarea
@@ -227,20 +229,20 @@ ${formData.message}
                     rows={4}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-lg sm:text-xl lg:text-2xl border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition resize-none"
+                    className="w-full px-4 py-3 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition resize-none"
                     placeholder="Tell us how we can help..."
                   ></textarea>
                 </div>
 
                 <div>
-                  <label className="block text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 mb-2">
+                  <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                     How Did You Hear About Us *
                   </label>
                   <select
                     name="howHeard"
                     value={formData.howHeard}
                     onChange={handleInputChange}
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-lg sm:text-xl lg:text-2xl border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition bg-white"
+                    className="w-full px-4 py-3 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition bg-white"
                   >
                     <option>Search Engine</option>
                     <option>Social Media</option>
@@ -253,7 +255,7 @@ ${formData.message}
 
                 <button
                   onClick={handleSubmit}
-                  className="w-full bg-teal-600 text-white px-6 py-4 sm:py-5 rounded-lg hover:bg-teal-700 transition font-bold text-xl sm:text-2xl lg:text-3xl shadow-lg hover:shadow-xl"
+                  className="w-full bg-teal-600 text-white px-6 py-4 rounded-lg hover:bg-teal-700 transition font-bold text-lg sm:text-xl shadow-lg hover:shadow-xl"
                 >
                   Submit
                 </button>
@@ -263,20 +265,24 @@ ${formData.message}
             {/* Contact Information Sidebar */}
             <div className="space-y-6 lg:space-y-8">
               {/* Company Info Card */}
-              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
                   Springs Companions
                 </h3>
                 
-                <div className="space-y-5">
+                <div className="space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 sm:w-7 sm:h-7 text-teal-600" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" />
                     </div>
                     <div>
-                      <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700 mb-1">Phone:</p>
-                      <a href={`tel:${phoneNumber}`} className="text-xl sm:text-2xl lg:text-3xl text-teal-600 hover:text-teal-700 font-bold">
+                      <p className="text-sm sm:text-base font-semibold text-gray-700 mb-1">Phone:</p>
+                      <a href={`tel:${phoneNumber}`} className="text-lg sm:text-xl text-teal-600 hover:text-teal-700 font-bold">
                         (817) 449-6668
+                      </a>
+                      <p className="text-sm sm:text-base font-semibold text-gray-700 mb-1 mt-2">Alternative Number:</p>
+                      <a href={`tel:${alternativeNumber}`} className="text-lg sm:text-xl text-teal-600 hover:text-teal-700 font-bold">
+                        +1 469 965 5019
                       </a>
                     </div>
                   </div>
@@ -285,12 +291,12 @@ ${formData.message}
                     href={`mailto:${email}?subject=${encodeURIComponent('Care Services Inquiry')}&body=${encodeURIComponent('Hello Springs Companions,\n\nI would like to inquire about your care services.\n\nName:\nPhone:\nBest time to contact:\n\nThank you!')}`}
                     className="flex items-start gap-4 w-full text-left hover:bg-teal-50 p-4 rounded-xl transition-all group"
                   >
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-teal-100 group-hover:bg-teal-200 rounded-full flex items-center justify-center flex-shrink-0 transition">
-                      <Mail className="w-6 h-6 sm:w-7 sm:h-7 text-teal-600" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-teal-100 group-hover:bg-teal-200 rounded-full flex items-center justify-center flex-shrink-0 transition">
+                      <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" />
                     </div>
                     <div>
-                      <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700 mb-1">Email:</p>
-                      <p className="text-lg sm:text-xl lg:text-2xl text-teal-600 group-hover:text-teal-700 font-semibold break-all transition">
+                      <p className="text-sm sm:text-base font-semibold text-gray-700 mb-1">Email:</p>
+                      <p className="text-base sm:text-lg text-teal-600 group-hover:text-teal-700 font-semibold break-all transition">
                         info@springcompanions.us
                       </p>
                     </div>
@@ -299,18 +305,18 @@ ${formData.message}
 
                 <button
                   onClick={handleScheduleClick}
-                  className="w-full mt-8 bg-gradient-to-r from-teal-600 to-teal-800 text-white px-6 py-4 sm:py-5 rounded-lg hover:from-teal-700 hover:to-teal-900 transition inline-flex items-center justify-center gap-3 font-bold text-lg sm:text-xl lg:text-2xl shadow-lg hover:shadow-xl"
+                  className="w-full mt-6 bg-gradient-to-r from-teal-600 to-teal-800 text-white px-6 py-4 rounded-lg hover:from-teal-700 hover:to-teal-900 transition inline-flex items-center justify-center gap-3 font-bold text-base sm:text-lg shadow-lg hover:shadow-xl"
                 >
                   Quick Contact Options
-                  <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+                  <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
 
               {/* Areas We Serve Card */}
-              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <MapPin className="w-8 h-8 sm:w-10 sm:h-10 text-teal-600" />
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
+                  <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-teal-600" />
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
                     Areas We Serve
                   </h3>
                 </div>
@@ -320,7 +326,7 @@ ${formData.message}
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583779.0820319634!2d-99.90516754999999!3d31.168910699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864070360b823249%3A0x16eb1c8f1808de3c!2sTexas!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
                     width="100%"
-                    height="300"
+                    height="250"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
@@ -329,21 +335,21 @@ ${formData.message}
                   ></iframe>
                 </div>
                 
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-3">
                   {areasServed.map((area, index) => (
                     <div
                       key={index}
-                      className={`${area.color} text-white px-6 py-4 sm:py-5 rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1`}
+                      className={`${area.color} text-white px-4 py-3 rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1`}
                     >
-                      <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-center">
+                      <p className="text-lg sm:text-xl font-bold text-center">
                         {area.name}
                       </p>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6 p-4 sm:p-5 bg-teal-50 rounded-xl border-2 border-teal-200">
-                  <p className="text-base sm:text-lg lg:text-xl text-gray-700 text-center leading-relaxed">
+                <div className="mt-6 p-4 bg-teal-50 rounded-xl border-2 border-teal-200">
+                  <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
                     Serving the greater <strong>Texas</strong> area with compassionate care
                   </p>
                 </div>
@@ -356,36 +362,36 @@ ${formData.message}
       {/* Contact Method Selection Modal */}
       {showContactModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-6 sm:p-10 lg:p-12 relative animate-fadeIn max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-6 sm:p-8 relative animate-fadeIn max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setShowContactModal(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
             >
-              <X size={32} />
+              <X size={28} />
             </button>
             
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 text-center pr-8">
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 text-center pr-8">
               Choose Your Preferred Contact Method
             </h3>
-            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 lg:mb-10 text-center leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-600 mb-6 text-center leading-relaxed">
               Select how you'd like to reach us
             </p>
             
-            <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
               {/* Call Option */}
               <button
                 onClick={() => {
                   setShowContactModal(false);
                   window.location.href = `tel:${phoneNumber}`;
                 }}
-                className="flex flex-col items-center gap-4 p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white border-2 border-gray-300 rounded-2xl hover:border-gray-500 hover:shadow-xl transition-all group cursor-pointer"
+                className="flex flex-col items-center gap-3 p-5 sm:p-6 bg-gradient-to-br from-gray-50 to-white border-2 border-gray-300 rounded-2xl hover:border-gray-500 hover:shadow-xl transition-all group cursor-pointer"
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-gray-800 transition shadow-lg">
-                  <Phone size={36} className="text-white" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-gray-800 transition shadow-lg">
+                  <Phone size={28} className="text-white" />
                 </div>
                 <div className="text-center">
-                  <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Call Us</h4>
-                  <p className="text-base sm:text-lg lg:text-xl text-gray-600">Speak with us directly</p>
+                  <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Call Us</h4>
+                  <p className="text-sm sm:text-base text-gray-600">Speak with us directly</p>
                 </div>
               </button>
 
@@ -395,14 +401,14 @@ ${formData.message}
                   setShowContactModal(false);
                   window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Springs Companions, I would like to schedule a free consultation.")}`, '_blank');
                 }}
-                className="flex flex-col items-center gap-4 p-6 sm:p-8 bg-gradient-to-br from-teal-50 to-white border-2 border-teal-200 rounded-2xl hover:border-teal-500 hover:shadow-xl transition-all group cursor-pointer"
+                className="flex flex-col items-center gap-3 p-5 sm:p-6 bg-gradient-to-br from-teal-50 to-white border-2 border-teal-200 rounded-2xl hover:border-teal-500 hover:shadow-xl transition-all group cursor-pointer"
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-teal-700 rounded-full flex items-center justify-center group-hover:bg-teal-800 transition shadow-lg">
-                  <MessageCircle size={36} className="text-white" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-teal-700 rounded-full flex items-center justify-center group-hover:bg-teal-800 transition shadow-lg">
+                  <MessageCircle size={28} className="text-white" />
                 </div>
                 <div className="text-center">
-                  <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">WhatsApp</h4>
-                  <p className="text-base sm:text-lg lg:text-xl text-gray-600">Message us instantly</p>
+                  <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">WhatsApp</h4>
+                  <p className="text-sm sm:text-base text-gray-600">Message us instantly</p>
                 </div>
               </button>
 
@@ -412,20 +418,20 @@ ${formData.message}
                   setShowContactModal(false);
                   window.location.href = `sms:${phoneNumber}?body=${encodeURIComponent("Hello Springs Companions, I would like to schedule a free consultation.")}`;
                 }}
-                className="flex flex-col items-center gap-4 p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white border-2 border-gray-300 rounded-2xl hover:border-gray-500 hover:shadow-xl transition-all group cursor-pointer sm:col-span-2"
+                className="flex flex-col items-center gap-3 p-5 sm:p-6 bg-gradient-to-br from-gray-50 to-white border-2 border-gray-300 rounded-2xl hover:border-gray-500 hover:shadow-xl transition-all group cursor-pointer sm:col-span-2"
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-800 rounded-full flex items-center justify-center group-hover:bg-gray-900 transition shadow-lg">
-                  <MessageCircle size={36} className="text-white" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-800 rounded-full flex items-center justify-center group-hover:bg-gray-900 transition shadow-lg">
+                  <MessageCircle size={28} className="text-white" />
                 </div>
                 <div className="text-center">
-                  <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Text/SMS</h4>
-                  <p className="text-base sm:text-lg lg:text-xl text-gray-600">Send us a text message</p>
+                  <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Text/SMS</h4>
+                  <p className="text-sm sm:text-base text-gray-600">Send us a text message</p>
                 </div>
               </button>
             </div>
 
-            <div className="mt-8 lg:mt-10 p-5 sm:p-6 bg-gradient-to-r from-teal-50 to-gray-50 rounded-xl border-2 border-teal-200">
-              <p className="text-base sm:text-lg lg:text-xl text-gray-700 text-center leading-relaxed">
+            <div className="mt-6 p-4 bg-gradient-to-r from-teal-50 to-gray-50 rounded-xl border-2 border-teal-200">
+              <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
                 <strong className="text-teal-700">Pro Tip:</strong> Use WhatsApp or text messaging to easily send images or documents along with your inquiry!
               </p>
             </div>

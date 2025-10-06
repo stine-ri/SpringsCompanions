@@ -19,21 +19,28 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-10 mb-20 lg:mb-32">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 lg:mb-8 leading-tight">
+        {/* New Welcome Header */}
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 text-teal-300">
+          Welcome to Springs Companions
+        </h2>
+        
+        {/* Main Heading */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 lg:mb-8 leading-tight">
           Compassionate Care for Your Loved Ones, Right at Home
         </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 lg:mb-8 text-gray-200 max-w-4xl mx-auto font-semibold">
+        
+        {/* Subtitle */}
+        <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-8 lg:mb-12 text-gray-200 max-w-4xl mx-auto font-semibold">
           Every Senior Deserves Dignity and Comfort
         </p>
-        <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-8 lg:mb-10 text-gray-300 max-w-6xl mx-auto leading-relaxed">
-          At Springs Companions, we believe that every senior deserves to live safely, comfortably, and with dignity in their own home. Our trained caregivers provide personalized, compassionate support for seniors facing Alzheimer's, dementia, chronic illness, post-surgery recovery, and mobility challenges.
-        </p>
+
+        {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-stretch">
-          <a href="/contact" className="bg-teal-600 text-white px-8 sm:px-10 py-5 rounded-full hover:bg-teal-700 transition text-lg sm:text-xl font-semibold shadow-2xl inline-flex items-center justify-center gap-2 min-w-fit">
+          <a href="/contact" className="bg-teal-600 text-white px-8 sm:px-10 py-5 rounded-full hover:bg-teal-700 transition text-base sm:text-lg font-semibold shadow-2xl inline-flex items-center justify-center gap-2 min-w-fit transform hover:-translate-y-1 duration-300">
             Schedule a Free Consultation
             <ChevronRight className="w-5 h-5" />
           </a>
-          <a href="/services" className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-8 sm:px-10 py-5 rounded-full hover:bg-white/20 transition text-lg sm:text-xl font-semibold inline-flex items-center justify-center gap-2 min-w-fit">
+          <a href="/services" className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-8 sm:px-10 py-5 rounded-full hover:bg-white/20 transition text-base sm:text-lg font-semibold inline-flex items-center justify-center gap-2 min-w-fit transform hover:-translate-y-1 duration-300">
             Learn About Our Services
             <ChevronRight className="w-5 h-5" />
           </a>

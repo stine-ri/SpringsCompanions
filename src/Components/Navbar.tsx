@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { Menu, X, ChevronDown, Phone, Mail, Facebook, Linkedin} from 'lucide-react';
+import { Menu, X, ChevronDown, Phone, Mail, Facebook} from 'lucide-react';
 import { FaTiktok } from "react-icons/fa";
+
 
 const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
+  const [dropdownTimeout, setDropdownTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const contactInfo = {
     phone: '8174496668',
     phoneDisplay: '(817) 449-6668',
-    email: 'info@springcompanions.us',
-    facebook: 'https://facebook.com',
+    additionalPhone: '+14699655019',
+    additionalPhoneDisplay: '+1 (469) 965-5019',
+    email: 'info@springscompanions.us',
+    facebook: 'https://www.facebook.com/profile.php?id=61581776879950',
     linkedin: 'https://linkedin.com',
-    tiktok: 'https://www.tiktok.com/@yourusername'
+    tiktok: 'https://www.tiktok.com/@springscompanion',
+    instagram: 'https://www.instagram.com/springscompan817/?hl=en'
   };
 
   const navItems = [
@@ -82,44 +87,67 @@ const Navbar: React.FC = () => {
     setMobileOpenDropdown(mobileOpenDropdown === label ? null : label);
   };
 
+  const handleDropdownEnter = (label: string) => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout);
+      setDropdownTimeout(null);
+    }
+    setOpenDropdown(label);
+  };
+
+  const handleDropdownLeave = () => {
+    const timeout = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 300); // 300ms delay before closing
+    setDropdownTimeout(timeout);
+  };
+
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-gradient-to-r from-teal-600 to-teal-700 text-white py-2 sm:py-3 md:py-3.5 fixed top-0 left-0 right-0 z-50 shadow-sm">
+      {/* Top Bar - Reduced height */}
+      <div className="bg-gradient-to-r from-teal-600 to-teal-700 text-white py-1.5 sm:py-2 md:py-2.5 fixed top-0 left-0 right-0 z-50 shadow-sm">
         <div className="w-full px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-2 md:gap-3 text-xs sm:text-sm md:text-base">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-1.5 sm:gap-2 md:gap-2.5 text-xs sm:text-sm md:text-base">
             {/* Contact Info */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-3 md:gap-4 lg:gap-6">
-              <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-1.5 sm:gap-2 hover:text-teal-100 transition-colors">
-                <Phone size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
-                <span className="font-bold text-xs sm:text-sm md:text-base">{contactInfo.phoneDisplay}</span>
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-2 md:gap-3 lg:gap-4">
+              <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-1 sm:gap-1.5 hover:text-teal-100 transition-colors">
+                <Phone size={12} className="sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
+                <span className="font-bold text-xs sm:text-sm">{contactInfo.phoneDisplay}</span>
               </a>
-              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-1.5 sm:gap-2 hover:text-teal-100 transition-colors">
-                <Mail size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
-                <span className="hidden sm:inline font-bold text-xs sm:text-sm md:text-base">{contactInfo.email}</span>
+              <span className="text-teal-200 mx-1 hidden sm:inline">|</span>
+              <a href={`tel:${contactInfo.additionalPhone}`} className="flex items-center gap-1 sm:gap-1.5 hover:text-teal-100 transition-colors">
+                <Phone size={12} className="sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
+                <span className="font-bold text-xs sm:text-sm">{contactInfo.additionalPhoneDisplay}</span>
+              </a>
+              <span className="text-teal-200 mx-1 hidden sm:inline">|</span>
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-1 sm:gap-1.5 hover:text-teal-100 transition-colors">
+                <Mail size={12} className="sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
+                <span className="hidden sm:inline font-bold text-xs sm:text-sm">{contactInfo.email}</span>
                 <span className="sm:hidden font-bold text-xs">Email</span>
               </a>
             </div>
 
             {/* Right Side - CTA & Social */}
-            <div className="flex items-center gap-3 sm:gap-3 md:gap-4">
+            <div className="flex items-center gap-2 sm:gap-2 md:gap-3">
               <a 
                 href="/contact"
                 onClick={(e) => handleNavClick(e, '/contact')}
-                className="bg-white text-teal-700 px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-2.5 rounded-full hover:bg-teal-50 transition-all font-bold text-[10px] sm:text-xs md:text-sm whitespace-nowrap shadow-sm hover:shadow"
+                className="bg-white text-teal-700 px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full hover:bg-teal-50 transition-all font-bold text-[9px] sm:text-xs md:text-sm whitespace-nowrap shadow-sm hover:shadow"
               >
                 FREE CONSULTATION
               </a>
-              <div className="flex items-center gap-2 sm:gap-2 md:gap-3">
+              <div className="flex items-center gap-1.5 sm:gap-2 md:gap-2.5">
                 <span className="text-xs sm:text-sm hidden lg:inline font-bold">Follow Us</span>
                 <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-teal-100 transition-transform hover:scale-110">
-                  <Facebook size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                  <Facebook size={12} className="sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
                 </a>
-                <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-teal-100 transition-transform hover:scale-110">
-                  <Linkedin size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-teal-100 transition-transform hover:scale-110">
+                  <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
                 </a>
                 <a href={contactInfo.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-teal-100 transition-transform hover:scale-110">
-                  <FaTiktok size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                  <FaTiktok size={12} className="sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
                 </a>
               </div>
             </div>
@@ -127,8 +155,8 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Navbar - Added spacing between blue and white navbar on mobile */}
-      <nav className="bg-white/98 backdrop-blur-md shadow-lg fixed top-[48px] sm:top-[52px] md:top-[58px] left-0 right-0 z-40 border-b border-gray-100">
+      {/* Main Navbar - Adjusted top spacing to match reduced teal bar height */}
+      <nav className="bg-white/98 backdrop-blur-md shadow-lg fixed top-[40px] sm:top-[44px] md:top-[48px] left-0 right-0 z-40 border-b border-gray-100">
         <div className="w-full px-4 sm:px-4 md:px-6 lg:px-12 xl:px-16">
           <div className="flex justify-between items-center h-16 sm:h-16 md:h-18 lg:h-20">
             {/* Logo Section */}
@@ -167,18 +195,12 @@ const Navbar: React.FC = () => {
                 <div 
                   key={item.href} 
                   className="relative group"
-                  onMouseEnter={() => item.subItems && setOpenDropdown(item.label)}
-                  onMouseLeave={() => setOpenDropdown(null)}
+                  onMouseEnter={() => item.subItems && handleDropdownEnter(item.label)}
+                  onMouseLeave={handleDropdownLeave}
                 >
                   <a
                     href={item.href}
-                    onClick={(e) => {
-                      if (!item.subItems) {
-                        handleNavClick(e, item.href);
-                      } else {
-                        e.preventDefault();
-                      }
-                    }}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className="text-gray-700 hover:text-teal-700 font-bold transition-colors duration-200 py-2 px-3 xl:px-4 relative flex items-center gap-1.5 cursor-pointer text-lg xl:text-xl whitespace-nowrap"
                   >
                     {item.label}
@@ -193,15 +215,16 @@ const Navbar: React.FC = () => {
                   
                   {/* Desktop Dropdown Menu */}
                   {item.subItems && openDropdown === item.label && (
-                    <div className="absolute top-full left-0 mt-1 w-80 bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200 max-h-[70vh] overflow-y-auto">
+                    <div 
+                      className="absolute top-full left-0 mt-1 w-80 bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200 max-h-[70vh] overflow-y-auto z-50"
+                      onMouseEnter={() => handleDropdownEnter(item.label)}
+                      onMouseLeave={handleDropdownLeave}
+                    >
                       {item.subItems.map((subItem) => (
                         <a
                           key={subItem.href}
                           href={subItem.href}
-                          onClick={(e) => {
-                            handleNavClick(e, subItem.href);
-                            setOpenDropdown(null);
-                          }}
+                          onClick={(e) => handleNavClick(e, subItem.href)}
                           className="block px-5 py-3 text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition-colors duration-150 text-base font-medium border-b border-gray-100 last:border-b-0"
                         >
                           {subItem.label}

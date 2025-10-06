@@ -12,38 +12,38 @@ const Footer: React.FC = () => {
               <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0">
                 <Heart className="text-white w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
               </div>
-              <span className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-white leading-tight">
+              <span className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-white leading-tight">
                 Springs Companions
               </span>
             </div>
-            <p className="text-sm sm:text-base lg:text-lg xl:text-xl leading-relaxed sm:leading-loose">
+            <p className="text-xs sm:text-sm lg:text-base xl:text-lg leading-relaxed sm:leading-loose">
               Compassionate in-home senior care across Texas, dedicated to dignity and comfort.
             </p>
           </div>
           
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold text-lg sm:text-xl lg:text-2xl xl:text-3xl mb-4 sm:mb-5 lg:mb-6 leading-tight">
+            <h4 className="text-white font-bold text-base sm:text-lg lg:text-xl xl:text-2xl mb-4 sm:mb-5 lg:mb-6 leading-tight">
               Quick Links
             </h4>
             <ul className="space-y-3 sm:space-y-4">
               <li>
-                <a href="/" className="text-sm sm:text-base lg:text-lg xl:text-xl hover:text-teal-400 transition-colors duration-200">
+                <a href="/" className="text-xs sm:text-sm lg:text-base xl:text-lg hover:text-teal-400 transition-colors duration-200">
                   Home
                 </a>
               </li>
               <li>
-                <a href="/about" className="text-sm sm:text-base lg:text-lg xl:text-xl hover:text-teal-400 transition-colors duration-200">
+                <a href="/about" className="text-xs sm:text-sm lg:text-base xl:text-lg hover:text-teal-400 transition-colors duration-200">
                   About
                 </a>
               </li>
               <li>
-                <a href="/services" className="text-sm sm:text-base lg:text-lg xl:text-xl hover:text-teal-400 transition-colors duration-200">
+                <a href="/services" className="text-xs sm:text-sm lg:text-base xl:text-lg hover:text-teal-400 transition-colors duration-200">
                   Services
                 </a>
               </li>
               <li>
-                <a href="/contact" className="text-sm sm:text-base lg:text-lg xl:text-xl hover:text-teal-400 transition-colors duration-200">
+                <a href="/contact" className="text-xs sm:text-sm lg:text-base xl:text-lg hover:text-teal-400 transition-colors duration-200">
                   Contact
                 </a>
               </li>
@@ -52,10 +52,10 @@ const Footer: React.FC = () => {
 
           {/* Our Services */}
           <div>
-            <h4 className="text-white font-bold text-lg sm:text-xl lg:text-2xl xl:text-3xl mb-4 sm:mb-5 lg:mb-6 leading-tight">
+            <h4 className="text-white font-bold text-base sm:text-lg lg:text-xl xl:text-2xl mb-4 sm:mb-5 lg:mb-6 leading-tight">
               Our Services
             </h4>
-            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base lg:text-lg xl:text-xl">
+            <ul className="space-y-3 sm:space-y-4 text-xs sm:text-sm lg:text-base xl:text-lg">
               <li className="leading-relaxed">Personal Care</li>
               <li className="leading-relaxed">Cognitive & Mobility Care</li>
               <li className="leading-relaxed">Respite Care</li>
@@ -66,10 +66,10 @@ const Footer: React.FC = () => {
 
           {/* Contact Info */}
           <div className="xs:col-span-2 lg:col-span-1">
-            <h4 className="text-white font-bold text-lg sm:text-xl lg:text-2xl xl:text-3xl mb-4 sm:mb-5 lg:mb-6 leading-tight">
+            <h4 className="text-white font-bold text-base sm:text-lg lg:text-xl xl:text-2xl mb-4 sm:mb-5 lg:mb-6 leading-tight">
               Contact Info
             </h4>
-            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base lg:text-lg xl:text-xl">
+            <ul className="space-y-3 sm:space-y-4 text-xs sm:text-sm lg:text-base xl:text-lg">
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 flex-shrink-0" />
                 <a href="tel:8174496668" className="hover:text-teal-400 transition-colors duration-200 break-all">
@@ -79,19 +79,19 @@ const Footer: React.FC = () => {
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 flex-shrink-0" />
                 <a href="mailto:info@springcompanions.us" className="hover:text-teal-400 transition-colors duration-200 break-all xs:break-normal">
-                  info@springcompanions.us
+                  info@springscompanions.us
                 </a>
               </li>
               <li className="flex items-start gap-3 mt-4 sm:mt-6">
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 mt-0.5 sm:mt-1 flex-shrink-0" />
-                <span className="leading-relaxed">Serving Arlington, Dallas, Houston, San Antonio, Austin</span>
+                <span className="leading-relaxed">Serving Arlington, Dallas, Houston, San Antonio, Austin, Fort Worth</span>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 pt-6 sm:pt-8 lg:pt-10 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-sm sm:text-base lg:text-lg xl:text-xl">
+        <div className="border-t border-gray-800 pt-6 sm:pt-8 lg:pt-10 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-xs sm:text-sm lg:text-base xl:text-lg">
           <p className="text-center sm:text-left">
             &copy; 2025 Springs Companions. All rights reserved.
           </p>

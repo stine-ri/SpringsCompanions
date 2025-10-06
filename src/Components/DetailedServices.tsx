@@ -258,12 +258,12 @@ const Services: React.FC = () => {
             <div className="text-center px-4 sm:px-6 md:px-8 lg:px-12">
               <div className="relative">
                 {/* "Care" - Slides from left and rotates */}
-                <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-white drop-shadow-2xl animate-slideRotateLeft opacity-0">
+                <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl animate-slideRotateLeft opacity-0">
                   Care
                 </span>
                 {' '}
                 {/* "Services" - Slides from right and rotates */}
-                <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-white drop-shadow-2xl animate-slideRotateRight opacity-0">
+                <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl animate-slideRotateRight opacity-0">
                   Services
                 </span>
               </div>
@@ -388,37 +388,37 @@ const Services: React.FC = () => {
         `}</style>
 
         {/* Introduction Text Section */}
-        <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-24">
+        <section className="bg-white py-12 sm:py-16 md:py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-700 leading-relaxed text-center mb-6 sm:mb-8 md:mb-10">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed text-center mb-6 sm:mb-8">
               Springs Companions provides compassionate and affordable in-home senior care, elderly care, and assisted living support. We are dedicated to providing <span className="font-bold">peace of mind for you and your family</span>. Our caregivers help seniors maintain independence while living in the comfort of their own homes.
             </p>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-700 leading-relaxed text-center">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed text-center">
               We understand that inviting a caregiver into your home is a big decision. That's why Springs Companions works closely with you to understand your needs and provide caregivers best suited to your individual situation. Once care begins, we continually assess your needs to ensure satisfaction. Communication and compatibility matter to us — we aim to build relationships based on trust, respect, and personalized attention.
             </p>
           </div>
         </section>
 
         {/* Main Content Section with Sidebar */}
-        <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
+        <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
           <div className="flex flex-col lg:flex-row gap-0">
             
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden mx-4 sm:mx-6 mb-4 sm:mb-6 bg-white p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg flex items-center justify-between text-teal-700 font-bold text-lg sm:text-xl md:text-2xl border-2 border-teal-200 hover:bg-teal-50 transition-all"
+              className="lg:hidden mx-4 sm:mx-6 mb-4 sm:mb-6 bg-white p-4 sm:p-5 rounded-xl shadow-lg flex items-center justify-between text-teal-700 font-bold text-base sm:text-lg border-2 border-teal-200 hover:bg-teal-50 transition-all"
             >
               <span>Our Services</span>
-              <ChevronRight className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-90' : ''}`} size={24} />
+              <ChevronRight className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-90' : ''}`} size={20} />
             </button>
 
             {/* Sidebar - Full Height, Edge to Edge on Desktop */}
             <aside className={`lg:block ${isMobileMenuOpen ? 'block' : 'hidden'} w-full lg:w-[350px] xl:w-[400px] lg:min-h-screen bg-white lg:shadow-2xl`}>
-              <div className="lg:sticky lg:top-[116px] p-4 sm:p-6 md:p-8 lg:p-10">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 sm:mb-7 md:mb-8 pb-3 sm:pb-4 md:pb-5 border-b-4 border-teal-600">
+              <div className="lg:sticky lg:top-[116px] p-4 sm:p-6 md:p-8">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 sm:mb-7 pb-3 sm:pb-4 border-b-4 border-teal-600">
                   Our Services
                 </h3>
-                <nav className="space-y-2 sm:space-y-2.5 md:space-y-3">
+                <nav className="space-y-2 sm:space-y-2.5">
                   {services.map((service) => {
                     const ServiceIcon = service.icon;
                     const isActive = activeService === service.id;
@@ -426,14 +426,14 @@ const Services: React.FC = () => {
                       <button
                         key={service.id}
                         onClick={() => handleServiceClick(service.id)}
-                        className={`w-full text-left px-4 sm:px-5 md:px-6 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl transition-all duration-300 flex items-center gap-3 sm:gap-3.5 md:gap-4 ${
+                        className={`w-full text-left px-4 sm:px-5 py-3 sm:py-4 rounded-xl transition-all duration-300 flex items-center gap-3 sm:gap-3.5 ${
                           isActive
                             ? 'bg-teal-600 text-white shadow-xl scale-105'
                             : 'text-gray-700 hover:bg-teal-50 hover:text-teal-700 hover:shadow-md'
                         }`}
                       >
-                        <ServiceIcon size={24} className="flex-shrink-0 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-                        <span className="font-semibold text-base sm:text-lg md:text-xl leading-snug">
+                        <ServiceIcon size={20} className="flex-shrink-0 sm:w-5 sm:h-5" />
+                        <span className="font-semibold text-sm sm:text-base leading-snug">
                           {service.title}
                         </span>
                       </button>
@@ -444,23 +444,23 @@ const Services: React.FC = () => {
             </aside>
 
             {/* Main Content Area */}
-            <main id="service-content" className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+            <main id="service-content" className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12">
               <div className="max-w-6xl">
                 
                 {/* Service Image */}
-                <div className="relative h-64 sm:h-80 md:h-96 lg:h-[450px] xl:h-[550px] overflow-hidden rounded-2xl sm:rounded-3xl mb-8 sm:mb-10 md:mb-12 shadow-2xl">
+                <div className="relative h-64 sm:h-80 md:h-96 lg:h-[450px] overflow-hidden rounded-2xl sm:rounded-3xl mb-8 sm:mb-10 shadow-2xl">
                   <img
                     src={currentService.image}
                     alt={currentService.title}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 lg:p-12">
-                    <div className="flex items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-2 sm:mb-3 md:mb-4">
-                      <div className="bg-white/95 backdrop-blur-sm p-2.5 sm:p-3 md:p-4 lg:p-5 rounded-xl sm:rounded-2xl shadow-lg">
-                        <Icon size={32} className="text-teal-600 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
+                    <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3">
+                      <div className="bg-white/95 backdrop-blur-sm p-2.5 sm:p-3 rounded-xl shadow-lg">
+                        <Icon size={24} className="text-teal-600 sm:w-6 sm:h-6" />
                       </div>
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-white drop-shadow-2xl leading-tight">
+                      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-2xl leading-tight">
                         {currentService.title}
                       </h2>
                     </div>
@@ -468,47 +468,47 @@ const Services: React.FC = () => {
                 </div>
 
                 {/* Service Description */}
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-gray-700 leading-relaxed mb-10 sm:mb-12 md:mb-14 lg:mb-16">
+                <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed mb-8 sm:mb-10 md:mb-12">
                   {currentService.description}
                 </p>
 
                 {/* Service Details */}
-                <div className="mb-10 sm:mb-12 md:mb-14 lg:mb-16">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 sm:mb-7 md:mb-8 lg:mb-10 flex items-center gap-3 sm:gap-4 md:gap-5">
-                    <div className="w-1.5 sm:w-2 h-8 sm:h-10 md:h-12 bg-teal-600 rounded-full"></div>
+                <div className="mb-8 sm:mb-10 md:mb-12">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 sm:mb-5 md:mb-6 flex items-center gap-2 sm:gap-3">
+                    <div className="w-1.5 sm:w-2 h-6 sm:h-8 bg-teal-600 rounded-full"></div>
                     Services Include:
                   </h3>
-                  <div className="space-y-3 sm:space-y-4 md:space-y-5">
+                  <div className="space-y-2 sm:space-y-3">
                     {currentService.details.map((detail, index) => (
                       <div
                         key={index}
-                        className="flex items-start gap-3 sm:gap-4 md:gap-5 p-4 sm:p-5 md:p-6 lg:p-7 rounded-xl sm:rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-200 border-l-4 border-teal-600"
+                        className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-white shadow-md hover:shadow-xl transition-all duration-200 border-l-4 border-teal-600"
                       >
-                        <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-teal-600 rounded-full flex items-center justify-center mt-0.5 sm:mt-1">
-                          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-teal-600 rounded-full flex items-center justify-center mt-0.5">
+                          <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-700 leading-relaxed flex-1">{detail}</p>
+                        <p className="text-sm sm:text-base text-gray-700 leading-relaxed flex-1">{detail}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* CTA Section */}
-                <div className="p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 bg-gradient-to-br from-teal-600 to-teal-700 rounded-2xl sm:rounded-3xl shadow-2xl text-white">
-                  <h4 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 md:mb-5">
+                <div className="p-6 sm:p-8 md:p-10 bg-gradient-to-br from-teal-600 to-teal-700 rounded-2xl shadow-2xl text-white">
+                  <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 md:mb-4">
                     Ready to Get Started?
                   </h4>
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl mb-6 sm:mb-8 md:mb-10 leading-relaxed text-teal-50">
+                  <p className="text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed text-teal-50">
                     Contact us today for a free consultation and discover how we can support your loved one.
                   </p>
                   <a
                     href="/contact"
-                    className="inline-flex items-center gap-2 sm:gap-3 md:gap-4 bg-white text-teal-700 px-6 sm:px-8 md:px-10 lg:px-12 py-4 sm:py-5 md:py-6 lg:py-7 rounded-full hover:bg-teal-50 transition-all font-bold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
+                    className="inline-flex items-center gap-2 sm:gap-3 bg-white text-teal-700 px-5 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full hover:bg-teal-50 transition-all font-bold text-sm sm:text-base shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
                   >
                     Get Free Consultation
-                    <ChevronRight size={24} className="sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
+                    <ChevronRight size={18} className="sm:w-4 sm:h-4" />
                   </a>
                 </div>
               </div>
@@ -517,20 +517,20 @@ const Services: React.FC = () => {
         </section>
 
         {/* Bottom CTA Section */}
-        <section className="bg-gradient-to-r from-teal-700 to-teal-600 text-white py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
+        <section className="bg-gradient-to-r from-teal-700 to-teal-600 text-white py-12 sm:py-16 md:py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight">
               Don't See a Service You Need?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-teal-50 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 text-teal-50 leading-relaxed">
               At Springs Companions, your loved one's needs come first. If there's a type of care you're looking for that isn't listed, we're happy to create a personalized solution.
             </p>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 sm:gap-3 md:gap-4 bg-white text-teal-700 px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 py-4 sm:py-5 md:py-6 lg:py-7 xl:py-8 rounded-full hover:bg-teal-50 transition-all font-bold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
+              className="inline-flex items-center gap-2 sm:gap-3 bg-white text-teal-700 px-5 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full hover:bg-teal-50 transition-all font-bold text-sm sm:text-base shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
             >
               Contact Us Today
-              <ChevronRight size={24} className="sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
+              <ChevronRight size={18} className="sm:w-4 sm:h-4" />
             </a>
           </div>
         </section>
