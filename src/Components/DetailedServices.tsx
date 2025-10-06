@@ -242,7 +242,7 @@ const Services: React.FC = () => {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="/videos/7522219-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+            <source src="/videos/helping.mp4" type="video/mp4" />
             <img 
               src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
               alt="Senior care" 
