@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Plus, Minus, HelpCircle, ChevronRight, Phone } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
