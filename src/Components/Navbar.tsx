@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
     phoneDisplay: '(817) 449-6668',
     additionalPhone: '+14699655019',
     additionalPhoneDisplay: '+1 (469) 965-5019',
-    email: 'info@springscompanions.us',
+    email: 'info@springscompanions.com',
     facebook: 'https://www.facebook.com/profile.php?id=61581776879950',
     linkedin: 'https://linkedin.com',
     tiktok: 'https://www.tiktok.com/@springscompanion',

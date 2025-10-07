@@ -5,7 +5,7 @@ const Contact: React.FC = () => {
   const [showContactModal, setShowContactModal] = useState(false);
   
   const phoneNumber = "8174496668";
-  const email = "info@springscompanions.us";
+  const email = "info@springscompanions.com";
   const whatsappNumber = "18174496668"; // Format: country code + number
   
   const handleScheduleClick = () => {
@@ -78,7 +78,7 @@ const Contact: React.FC = () => {
               <div className="w-12 h-12 sm:w-14 sm:h-14 bg-teal-600 rounded-full flex items-center justify-center group-hover:bg-teal-700 transition-all shadow-lg flex-shrink-0">
                 <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <span className="font-semibold break-all xs:break-normal text-base">info@springscompanions.us</span>
+              <span className="font-semibold break-all xs:break-normal text-base">info@springscompanions.com</span>
             </a>
           </div>
           
