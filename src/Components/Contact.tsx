@@ -6,7 +6,7 @@ const Contact: React.FC = () => {
   
   const phoneNumber = "8174496668";
   const email = "info@springscompanions.com";
-  const whatsappNumber = "18174496668"; // Format: country code + number
+  const whatsappNumber = "18173746460"; // Format: country code + number
   
   const handleScheduleClick = () => {
     setShowContactModal(true);

@@ -18,7 +18,7 @@ const Contact = () => {
   const phoneNumber = "8174496668";
   const alternativeNumber = "+14699655019";
   const email = "info@springcompanions.com";
-  const whatsappNumber = "18174496668";
+  const whatsappNumber = "18173746460";
   
   const areasServed = [
      { name: 'Arlington', color: 'bg-teal-500' },
