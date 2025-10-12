@@ -8,9 +8,6 @@ const Contact: React.FC = () => {
   const email = "info@springscompanions.com";
   const whatsappNumber = "18173746460"; // Format: country code + number
   
-  const handleScheduleClick = () => {
-    setShowContactModal(true);
-  };
   
   const handleEmailContact = () => {
     window.location.href = `mailto:${email}?subject=Free Consultation Request&body=Hello Springs Companions,%0D%0A%0D%0AI would like to schedule a free consultation.%0D%0A%0D%0AName:%0D%0APhone:%0D%0APreferred Date/Time:%0D%0AAdditional Notes:`;
@@ -84,12 +81,12 @@ const Contact: React.FC = () => {
           
           {/* CTA Button */}
           <button 
-            onClick={handleScheduleClick}
-            className="bg-teal-600 text-white px-6 sm:px-8 py-3 rounded-full hover:bg-teal-700 transition-all inline-flex items-center gap-2 font-semibold text-base shadow-lg hover:shadow-teal-500/50 transform hover:-translate-y-1 duration-300"
-          >
-            Schedule Your Free Consultation Today
-            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
+  onClick={() => window.location.href = '/contact'}
+  className="bg-teal-600 text-white px-6 sm:px-8 py-3 rounded-full hover:bg-teal-700 transition-all inline-flex items-center gap-2 font-semibold text-base shadow-lg hover:shadow-teal-500/50 transform hover:-translate-y-1 duration-300"
+>
+  Schedule Your Free Consultation Today
+  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+</button>
         </div>
       </section>
 
