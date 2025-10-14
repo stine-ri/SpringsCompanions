@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
-           poster="/public/heroImage.png"
+           poster="/heroImage.png"
           className="w-full h-full object-cover"
         >
           <source src="/videos/7522219-uhd_3840_2160_25fps.mp4" type="video/mp4" />

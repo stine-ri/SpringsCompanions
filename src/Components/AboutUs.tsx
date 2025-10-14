@@ -344,7 +344,7 @@ const AboutUs: React.FC = () => {
   loop
   muted
   playsInline
-  poster="/public/aboutImage.png" 
+  poster="/aboutImage.png" 
   className="absolute inset-0 w-full h-full object-cover"
 >
   <source src="/videos/about video.mp4" type="video/mp4" />

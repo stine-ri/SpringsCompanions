@@ -240,7 +240,7 @@ const Services: React.FC = () => {
   loop
   muted
   playsInline
-  poster="/public/serviceHelping.png"
+  poster="/serviceHelping.png"
   className="absolute inset-0 w-full h-full object-cover"
 >
   <source src="/videos/helping.mp4" type="video/mp4" />
