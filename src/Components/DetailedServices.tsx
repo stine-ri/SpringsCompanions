@@ -19,6 +19,37 @@ const Services: React.FC = () => {
         }
       }, 100);
     }
+
+    // Add JSON-LD schema for video SEO
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Springs Companions Care Services - Compassionate Senior Care",
+      "description": "Discover our comprehensive senior care services including companionship, personal care, dementia support, and more. Springs Companions provides compassionate in-home care tailored to your loved one's needs.",
+      "thumbnailUrl": "https://www.springscompanions.com/serviceHelping.png",
+      "uploadDate": "2025-01-15T00:00:00Z",
+      "duration": "PT30S",
+      "contentUrl": "https://www.springscompanions.com/videos/helping.mp4",
+      "embedUrl": "https://www.springscompanions.com/services",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Springs Companions",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.springscompanions.com/logo.png"
+        }
+      }
+    });
+    document.head.appendChild(script);
+
+    // Cleanup
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
   }, []);
 
   const services = [
@@ -234,22 +265,33 @@ const Services: React.FC = () => {
         
         {/* Hero Section with Video Background and Animated Text */}
         <section className="relative h-[450px] sm:h-[550px] md:h-[650px] lg:h-[800px] overflow-hidden">
-          {/* Video Background */}
-         <video
-  autoPlay
-  loop
-  muted
-  playsInline
-  poster="/serviceHelping.png"
-  className="absolute inset-0 w-full h-full object-cover"
->
-  <source src="/videos/helping.mp4" type="video/mp4" />
-  <img 
-    src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
-    alt="Senior care" 
-    className="w-full h-full object-cover"
-  />
-</video>
+          {/* Video Background with Schema.org markup */}
+          <div itemScope itemType="https://schema.org/VideoObject">
+            <meta itemProp="name" content="Springs Companions Care Services - Compassionate Senior Care" />
+            <meta itemProp="description" content="Discover our comprehensive senior care services including companionship, personal care, dementia support, and more. Springs Companions provides compassionate in-home care tailored to your loved one's needs." />
+            <meta itemProp="thumbnailUrl" content="https://www.springscompanions.com/serviceHelping.png" />
+            <meta itemProp="uploadDate" content="2025-01-15T00:00:00Z" />
+            <meta itemProp="duration" content="PT30S" />
+            <meta itemProp="contentUrl" content="https://www.springscompanions.com/videos/helping.mp4" />
+            <meta itemProp="embedUrl" content="https://www.springscompanions.com/services" />
+            
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster="/serviceHelping.png"
+              className="absolute inset-0 w-full h-full object-cover"
+              itemProp="contentUrl"
+            >
+              <source src="/videos/helping.mp4" type="video/mp4" />
+              <img 
+                src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
+                alt="Senior care services" 
+                className="w-full h-full object-cover"
+              />
+            </video>
+          </div>
           
           {/* Gradient Overlay for better text visibility */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>

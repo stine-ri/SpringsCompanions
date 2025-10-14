@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Heart, Target, Shield, Users, Brain, Award, Lightbulb, MapPin, ChevronRight, Star } from 'lucide-react';
 
-// Uncomment these imports when using in your project
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -89,6 +88,28 @@ const AboutUs: React.FC = () => {
   ];
 
   const cities = ["Arlington", "Dallas", "Houston", "San Antonio", "Austin", "Fort Worth"];
+
+  // Video structured data
+  const videoStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "About Springs Companions - Compassionate Senior Care",
+    "description": "Learn about Springs Companions and our mission to provide compassionate, professional in-home senior care across Texas. Discover our story, values, and commitment to helping seniors age gracefully at home.",
+    "thumbnailUrl": "https://www.springscompanions.com/aboutImage.png",
+    "uploadDate": "2024-10-01",
+    "duration": "PT45S",
+    "contentUrl": "https://www.springscompanions.com/videos/about-video.mp4",
+    "embedUrl": "https://www.springscompanions.com/about#hero-video",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Springs Companions",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.springscompanions.com/logo.png"
+      }
+    },
+    "inLanguage": "en-US"
+  };
 
   const renderSectionContent = () => {
     switch(activeSection) {
@@ -335,25 +356,48 @@ const AboutUs: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
+      {/* JSON-LD Structured Data for Video SEO */}
+      <script 
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoStructuredData) }}
+      />
+      
       <div className="pt-[104px] sm:pt-[116px]">
         
-        {/* Hero Section with Video Background and Animated Text */}
-        <section className="relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[800px] overflow-hidden">
-         <video
-  autoPlay
-  loop
-  muted
-  playsInline
-  poster="/aboutImage.png" 
-  className="absolute inset-0 w-full h-full object-cover"
->
-  <source src="/videos/about video.mp4" type="video/mp4" />
-  <img 
-    src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
-    alt="Senior care" 
-    className="w-full h-full object-cover"
-  />
-</video>
+        {/* Hero Section with Video Background - Enhanced for SEO */}
+        <section 
+          id="hero-video"
+          className="relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[800px] overflow-hidden"
+          itemScope 
+          itemType="https://schema.org/VideoObject"
+        >
+          {/* Schema.org microdata for video */}
+          <meta itemProp="name" content="About Springs Companions - Compassionate Senior Care" />
+          <meta itemProp="description" content="Learn about Springs Companions and our mission to provide compassionate, professional in-home senior care across Texas. Discover our story, values, and commitment to helping seniors age gracefully at home." />
+          <meta itemProp="thumbnailUrl" content="https://www.springscompanions.com/aboutImage.png" />
+          <meta itemProp="uploadDate" content="2024-10-01" />
+          <meta itemProp="duration" content="PT45S" />
+          <meta itemProp="contentUrl" content="https://www.springscompanions.com/videos/about-video.mp4" />
+          <meta itemProp="embedUrl" content="https://www.springscompanions.com/about#hero-video" />
+          
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/aboutImage.png" 
+            className="absolute inset-0 w-full h-full object-cover"
+            itemProp="video"
+            title="About Springs Companions - Compassionate Senior Care Services"
+            aria-label="Background video showcasing Springs Companions senior care services and compassionate caregiving in Texas"
+          >
+            <source src="/videos/about video.mp4" type="video/mp4" />
+            <img 
+              src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
+              alt="Senior care services by Springs Companions" 
+              className="w-full h-full object-cover"
+            />
+          </video>
           
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
           
