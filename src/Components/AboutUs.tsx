@@ -339,20 +339,21 @@ const AboutUs: React.FC = () => {
         
         {/* Hero Section with Video Background and Animated Text */}
         <section className="relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[800px] overflow-hidden">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/videos/about video.mp4" type="video/mp4" />
-            <img 
-              src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
-              alt="Senior care" 
-              className="w-full h-full object-cover"
-            />
-          </video>
+         <video
+  autoPlay
+  loop
+  muted
+  playsInline
+  poster="/public/aboutImage.png" 
+  className="absolute inset-0 w-full h-full object-cover"
+>
+  <source src="/videos/about video.mp4" type="video/mp4" />
+  <img 
+    src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
+    alt="Senior care" 
+    className="w-full h-full object-cover"
+  />
+</video>
           
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
           

@@ -235,20 +235,21 @@ const Services: React.FC = () => {
         {/* Hero Section with Video Background and Animated Text */}
         <section className="relative h-[450px] sm:h-[550px] md:h-[650px] lg:h-[800px] overflow-hidden">
           {/* Video Background */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/videos/helping.mp4" type="video/mp4" />
-            <img 
-              src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
-              alt="Senior care" 
-              className="w-full h-full object-cover"
-            />
-          </video>
+         <video
+  autoPlay
+  loop
+  muted
+  playsInline
+  poster="/public/serviceHelping.png"
+  className="absolute inset-0 w-full h-full object-cover"
+>
+  <source src="/videos/helping.mp4" type="video/mp4" />
+  <img 
+    src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
+    alt="Senior care" 
+    className="w-full h-full object-cover"
+  />
+</video>
           
           {/* Gradient Overlay for better text visibility */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
