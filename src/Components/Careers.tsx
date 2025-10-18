@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, X, MapPin } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
