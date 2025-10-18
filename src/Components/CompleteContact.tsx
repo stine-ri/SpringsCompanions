@@ -17,7 +17,7 @@ const Contact = () => {
   
   const phoneNumber = "8174496668";
   const alternativeNumber = "+14699655019";
-  const email = "info@springcompanions.com";
+  const email = "info@springscompanions.com";
   const whatsappNumber = "18173746460";
   
   const areasServed = [
@@ -297,7 +297,7 @@ ${formData.message}
                     <div>
                       <p className="text-sm sm:text-base font-semibold text-gray-700 mb-1">Email:</p>
                       <p className="text-base sm:text-lg text-teal-600 group-hover:text-teal-700 font-semibold break-all transition">
-                        info@springcompanions.com
+                        info@springscompanions.com
                       </p>
                     </div>
                   </a>

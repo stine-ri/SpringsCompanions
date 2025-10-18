@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 flex-shrink-0" />
-                <a href="mailto:info@springcompanions.com" className="hover:text-teal-400 transition-colors duration-200 break-all xs:break-normal">
+                <a href="mailto:info@springscompanions.com" className="hover:text-teal-400 transition-colors duration-200 break-all xs:break-normal">
                   info@springscompanions.com
                 </a>
               </li>
