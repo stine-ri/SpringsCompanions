@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import VitePluginSitemap  from 'vite-plugin-sitemap'
+import VitePluginSitemap from 'vite-plugin-sitemap'
 
 const routes = [
-  '/',
   '/about',
   '/services', 
   '/contact',
