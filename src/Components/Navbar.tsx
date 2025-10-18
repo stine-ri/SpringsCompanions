@@ -51,6 +51,7 @@ const Navbar: React.FC = () => {
         { href: "/services#around-clock", label: "24/7 Care" }
       ]
     },
+    { href: "/careers", label: "Careers" },
     { 
       href: "/contact", 
       label: "Contact Us",
