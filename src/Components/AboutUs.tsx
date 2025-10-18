@@ -8,22 +8,6 @@ const AboutUs: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('about-us');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && sections.find(s => s.id === hash)) {
-      setActiveSection(hash);
-      setTimeout(() => {
-        const isMobile = window.innerWidth < 1024;
-        if (isMobile) {
-          const contentArea = document.getElementById('section-content');
-          if (contentArea) {
-            contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-      }, 100);
-    }
-  }, []);
-
   const sections = [
     { id: 'about-us', title: 'About Springs Companions', icon: Heart },
     { id: 'our-story', title: 'Our Story', icon: Lightbulb },
@@ -36,19 +20,77 @@ const AboutUs: React.FC = () => {
     { id: 'testimonials', title: 'Testimonials', icon: Star }
   ];
 
+  useEffect(() => {
+    // Check for hash in URL on mount
+    const hash = window.location.hash.replace('#', '');
+    
+    // Check sessionStorage for scroll target (from navbar navigation)
+    const scrollTarget = sessionStorage.getItem('scrollToSection');
+    
+    if (scrollTarget) {
+      // Remove from sessionStorage
+      sessionStorage.removeItem('scrollToSection');
+      
+      // Set active section
+      if (sections.find(s => s.id === scrollTarget)) {
+        setActiveSection(scrollTarget);
+      }
+      
+      // Scroll to section after a short delay to ensure page is loaded
+      setTimeout(() => {
+        scrollToSection(scrollTarget);
+      }, 300);
+    } else if (hash && sections.find(s => s.id === hash)) {
+      // Handle direct hash navigation
+      setActiveSection(hash);
+      setTimeout(() => {
+        scrollToSection(hash);
+      }, 300);
+    }
+
+    // Listen for section change events from navbar
+    const handleSectionChange = (e: CustomEvent) => {
+      const { sectionId } = e.detail;
+      if (sections.find(s => s.id === sectionId)) {
+        setActiveSection(sectionId);
+      }
+    };
+
+    window.addEventListener('sectionChange', handleSectionChange as EventListener);
+
+    return () => {
+      window.removeEventListener('sectionChange', handleSectionChange as EventListener);
+    };
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const isMobile = window.innerWidth < 1024;
+      
+      // More accurate navbar height calculation
+      const navbarHeight = isMobile ? 104 : 116;
+      const additionalPadding = 20;
+      
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - additionalPadding;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const handleSectionClick = (sectionId: string) => {
     setActiveSection(sectionId);
     setIsMobileMenuOpen(false);
+    
+    // Update URL without page reload
     window.history.pushState(null, '', `#${sectionId}`);
     
-    // Scroll to content on mobile
-    const isMobile = window.innerWidth < 1024;
-    if (isMobile) {
-      const contentArea = document.getElementById('section-content');
-      if (contentArea) {
-        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
+    // Scroll to section
+    scrollToSection(sectionId);
   };
 
   const objectives = [
@@ -89,33 +131,22 @@ const AboutUs: React.FC = () => {
 
   const cities = ["Arlington", "Dallas", "Houston", "San Antonio", "Austin", "Fort Worth"];
 
-  // Video structured data
   const videoStructuredData = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
     "name": "About Springs Companions - Compassionate Senior Care",
-    "description": "Learn about Springs Companions and our mission to provide compassionate, professional in-home senior care across Texas. Discover our story, values, and commitment to helping seniors age gracefully at home.",
+    "description": "Learn about Springs Companions and our mission to provide compassionate, professional in-home senior care across Texas.",
     "thumbnailUrl": "https://www.springscompanions.com/aboutImage.png",
     "uploadDate": "2024-10-01",
     "duration": "PT45S",
-    "contentUrl": "https://www.springscompanions.com/videos/about-video.mp4",
-    "embedUrl": "https://www.springscompanions.com/about#hero-video",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Springs Companions",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.springscompanions.com/logo.png"
-      }
-    },
-    "inLanguage": "en-US"
+    "contentUrl": "https://www.springscompanions.com/videos/about-video.mp4"
   };
 
   const renderSectionContent = () => {
     switch(activeSection) {
       case 'about-us':
         return (
-          <div>
+          <div id="about-us" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               About Springs Companions
             </h2>
@@ -138,7 +169,7 @@ const AboutUs: React.FC = () => {
 
       case 'our-story':
         return (
-          <div>
+          <div id="our-story" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               Our Story — Inspired by Compassion
             </h2>
@@ -160,7 +191,7 @@ const AboutUs: React.FC = () => {
 
       case 'vision-mission':
         return (
-          <div>
+          <div id="vision-mission" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
               Vision & Mission
             </h2>
@@ -194,7 +225,7 @@ const AboutUs: React.FC = () => {
 
       case 'objectives':
         return (
-          <div>
+          <div id="objectives" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
               Our Objectives
             </h2>
@@ -216,7 +247,7 @@ const AboutUs: React.FC = () => {
 
       case 'values':
         return (
-          <div>
+          <div id="values" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
               Our Values
             </h2>
@@ -236,7 +267,7 @@ const AboutUs: React.FC = () => {
 
       case 'commitment':
         return (
-          <div>
+          <div id="commitment" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               Our Commitment to Caregivers
             </h2>
@@ -259,7 +290,7 @@ const AboutUs: React.FC = () => {
 
       case 'local-impact':
         return (
-          <div>
+          <div id="local-impact" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               Our Local Impact
             </h2>
@@ -279,7 +310,7 @@ const AboutUs: React.FC = () => {
 
       case 'why-choose':
         return (
-          <div>
+          <div id="why-choose" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-12">
               Why Choose Springs Companions
             </h2>
@@ -319,7 +350,7 @@ const AboutUs: React.FC = () => {
 
       case 'testimonials':
         return (
-          <div>
+          <div id="testimonials" className="scroll-mt-32">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
               What Families Say About Us
             </h2>
@@ -356,7 +387,6 @@ const AboutUs: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      {/* JSON-LD Structured Data for Video SEO */}
       <script 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(videoStructuredData) }}
@@ -364,22 +394,10 @@ const AboutUs: React.FC = () => {
       
       <div className="pt-[104px] sm:pt-[116px]">
         
-        {/* Hero Section with Video Background - Enhanced for SEO */}
         <section 
           id="hero-video"
           className="relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[800px] overflow-hidden"
-          itemScope 
-          itemType="https://schema.org/VideoObject"
         >
-          {/* Schema.org microdata for video */}
-          <meta itemProp="name" content="About Springs Companions - Compassionate Senior Care" />
-          <meta itemProp="description" content="Learn about Springs Companions and our mission to provide compassionate, professional in-home senior care across Texas. Discover our story, values, and commitment to helping seniors age gracefully at home." />
-          <meta itemProp="thumbnailUrl" content="https://www.springscompanions.com/aboutImage.png" />
-          <meta itemProp="uploadDate" content="2024-10-01" />
-          <meta itemProp="duration" content="PT45S" />
-          <meta itemProp="contentUrl" content="https://www.springscompanions.com/videos/about-video.mp4" />
-          <meta itemProp="embedUrl" content="https://www.springscompanions.com/about#hero-video" />
-          
           <video
             autoPlay
             loop
@@ -387,16 +405,8 @@ const AboutUs: React.FC = () => {
             playsInline
             poster="/aboutImage.png" 
             className="absolute inset-0 w-full h-full object-cover"
-            itemProp="video"
-            title="About Springs Companions - Compassionate Senior Care Services"
-            aria-label="Background video showcasing Springs Companions senior care services and compassionate caregiving in Texas"
           >
             <source src="/videos/about video.mp4" type="video/mp4" />
-            <img 
-              src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
-              alt="Senior care services by Springs Companions" 
-              className="w-full h-full object-cover"
-            />
           </video>
           
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
@@ -507,7 +517,6 @@ const AboutUs: React.FC = () => {
           }
         `}</style>
 
-        {/* Introduction Text Section */}
         <section className="bg-white py-12 sm:py-16 lg:py-20 xl:py-24">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed text-center mb-6 sm:mb-8 lg:mb-10">
@@ -519,11 +528,9 @@ const AboutUs: React.FC = () => {
           </div>
         </section>
 
-        {/* Main Content Section with Sticky Sidebar */}
         <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
           <div className="flex flex-col lg:flex-row gap-0">
             
-            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden mx-4 sm:mx-6 mb-4 sm:mb-6 bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg flex items-center justify-between text-teal-700 font-bold text-base sm:text-xl border-2 border-teal-200 hover:bg-teal-50 transition-all"
@@ -532,7 +539,6 @@ const AboutUs: React.FC = () => {
               <ChevronRight className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-90' : ''}`} size={20} />
             </button>
 
-            {/* Sidebar - Sticky on desktop, collapsible on mobile */}
             <aside className={`lg:block ${isMobileMenuOpen ? 'block' : 'hidden'} w-full lg:w-[320px] xl:w-[400px] bg-white lg:shadow-2xl`}>
               <div className="lg:sticky lg:top-[116px] p-4 sm:p-6 lg:p-8 xl:p-10">
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-6 lg:mb-8 pb-4 lg:pb-5 border-b-4 border-teal-600">
@@ -563,9 +569,8 @@ const AboutUs: React.FC = () => {
               </div>
             </aside>
 
-            {/* Main Content Area */}
             <main className="flex-1 px-4 sm:px-6 lg:px-12 xl:px-20 py-6 sm:py-8 lg:py-0">
-              <div id="section-content" className="max-w-6xl">
+              <div className="max-w-6xl">
                 {renderSectionContent()}
               </div>
             </main>

@@ -8,20 +8,6 @@ const Services: React.FC = () => {
   const [activeService, setActiveService] = useState<string>('companionship');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && services.find(s => s.id === hash)) {
-      setActiveService(hash);
-      setTimeout(() => {
-        const contentArea = document.getElementById('service-content');
-        if (contentArea) {
-          contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
-    }
-
-  }, []);
-
   const services = [
     {
       id: 'companionship',
@@ -211,64 +197,117 @@ const Services: React.FC = () => {
     }
   ];
 
-  const currentService = services.find(s => s.id === activeService) || services[0];
-  const Icon = currentService.icon;
+  useEffect(() => {
+    // Check for hash in URL on mount
+    const hash = window.location.hash.replace('#', '');
+    
+    // Check sessionStorage for scroll target (from navbar navigation)
+    const scrollTarget = sessionStorage.getItem('scrollToSection');
+    
+    if (scrollTarget) {
+      // Remove from sessionStorage
+      sessionStorage.removeItem('scrollToSection');
+      
+      // Set active service
+      if (services.find(s => s.id === scrollTarget)) {
+        setActiveService(scrollTarget);
+      }
+      
+      // Scroll to section after a short delay to ensure page is loaded
+      setTimeout(() => {
+        scrollToSection(scrollTarget);
+      }, 300);
+    } else if (hash && services.find(s => s.id === hash)) {
+      // Handle direct hash navigation
+      setActiveService(hash);
+      setTimeout(() => {
+        scrollToSection(hash);
+      }, 300);
+    }
+
+    // Listen for section change events from navbar
+    const handleSectionChange = (e: CustomEvent) => {
+      const { sectionId } = e.detail;
+      if (services.find(s => s.id === sectionId)) {
+        setActiveService(sectionId);
+      }
+    };
+
+    window.addEventListener('sectionChange', handleSectionChange as EventListener);
+
+    return () => {
+      window.removeEventListener('sectionChange', handleSectionChange as EventListener);
+    };
+  }, []);
+
+  const scrollToSection = (serviceId: string) => {
+    const element = document.getElementById(serviceId);
+    if (element) {
+      const isMobile = window.innerWidth < 1024;
+      
+      // More accurate navbar height calculation
+      const navbarHeight = isMobile ? 104 : 116;
+      const additionalPadding = 20;
+      
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - additionalPadding;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const handleServiceClick = (serviceId: string) => {
     setActiveService(serviceId);
     setIsMobileMenuOpen(false);
+    
+    // Update URL without page reload
     window.history.pushState(null, '', `#${serviceId}`);
     
-    const contentArea = document.getElementById('service-content');
-    if (contentArea) {
-      contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Scroll to service content
+    scrollToSection(serviceId);
   };
+
+  const currentService = services.find(s => s.id === activeService) || services[0];
+  const Icon = currentService.icon;
 
   return (
     <div className="min-h-screen bg-gray-50">
-
-      {/* Navbar */}
       <Navbar />
       
       <div className="pt-[104px] sm:pt-[116px]">
         
-        {/* Hero Section with Video Background and Animated Text */}
         <section className="relative h-[450px] sm:h-[550px] md:h-[650px] lg:h-[800px] overflow-hidden">
-          {/* Video Background  */}
           <video
-    autoPlay
-    loop
-    muted
-    playsInline
-    poster="/serviceHelping.png"
-    className="absolute inset-0 w-full h-full object-cover"
-  >
-    <source src="/videos/helping.mp4" type="video/mp4" />
-    <img 
-      src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
-      alt="Senior care services" 
-      className="w-full h-full object-cover"
-    />
-  </video>
-          {/* Gradient Overlay for better text visibility */}
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/serviceHelping.png"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/videos/helping.mp4" type="video/mp4" />
+            <img 
+              src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600" 
+              alt="Senior care services" 
+              className="w-full h-full object-cover"
+            />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
           
-          {/* Animated Text - Coming Together */}
           <div className="relative z-10 h-full flex items-center justify-center">
             <div className="text-center px-4 sm:px-6 md:px-8 lg:px-12">
               <div className="relative">
-                {/* "Care" - Slides from left and rotates */}
                 <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl animate-slideRotateLeft opacity-0">
                   Care
                 </span>
                 {' '}
-                {/* "Services" - Slides from right and rotates */}
                 <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl animate-slideRotateRight opacity-0">
                   Services
                 </span>
               </div>
-              {/* Expanding line with pulse effect */}
               <div className="mt-6 sm:mt-8 md:mt-10 flex justify-center">
                 <div className="h-1.5 sm:h-2 w-0 bg-gradient-to-r from-teal-400 via-white to-teal-400 rounded-full animate-expandPulse shadow-lg"></div>
               </div>
@@ -388,11 +427,10 @@ const Services: React.FC = () => {
           }
         `}</style>
 
-        {/* Introduction Text Section */}
         <section className="bg-white py-12 sm:py-16 md:py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
             <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed text-center mb-6 sm:mb-8">
-              Springs Companions provides compassionate and affordable in-home senior care, elderly care, and assisted living support. We are dedicated to providing <span className="font-bold">peace of mind for you and your family</span>. Our caregivers help seniors maintain independence while living in the comfort of their own homes.
+              Springs Companions provides compassionate and affordable in-home senior care, elderly care, and assisted living support. We are dedicated to providing <span className="font-bold text-teal-700">peace of mind for you and your family</span>. Our caregivers help seniors maintain independence while living in the comfort of their own homes.
             </p>
             <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed text-center">
               We understand that inviting a caregiver into your home is a big decision. That's why Springs Companions works closely with you to understand your needs and provide caregivers best suited to your individual situation. Once care begins, we continually assess your needs to ensure satisfaction. Communication and compatibility matter to us — we aim to build relationships based on trust, respect, and personalized attention.
@@ -400,11 +438,9 @@ const Services: React.FC = () => {
           </div>
         </section>
 
-        {/* Main Content Section with Sidebar */}
         <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
           <div className="flex flex-col lg:flex-row gap-0">
             
-            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden mx-4 sm:mx-6 mb-4 sm:mb-6 bg-white p-4 sm:p-5 rounded-xl shadow-lg flex items-center justify-between text-teal-700 font-bold text-base sm:text-lg border-2 border-teal-200 hover:bg-teal-50 transition-all"
@@ -413,7 +449,6 @@ const Services: React.FC = () => {
               <ChevronRight className={`transform transition-transform ${isMobileMenuOpen ? 'rotate-90' : ''}`} size={20} />
             </button>
 
-            {/* Sidebar - Full Height, Edge to Edge on Desktop */}
             <aside className={`lg:block ${isMobileMenuOpen ? 'block' : 'hidden'} w-full lg:w-[350px] xl:w-[400px] lg:min-h-screen bg-white lg:shadow-2xl`}>
               <div className="lg:sticky lg:top-[116px] p-4 sm:p-6 md:p-8">
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 sm:mb-7 pb-3 sm:pb-4 border-b-4 border-teal-600">
@@ -444,11 +479,9 @@ const Services: React.FC = () => {
               </div>
             </aside>
 
-            {/* Main Content Area */}
-            <main id="service-content" className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12">
-              <div className="max-w-6xl">
+            <main className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12">
+              <div id={currentService.id} className="scroll-mt-32 max-w-6xl">
                 
-                {/* Service Image */}
                 <div className="relative h-64 sm:h-80 md:h-96 lg:h-[450px] overflow-hidden rounded-2xl sm:rounded-3xl mb-8 sm:mb-10 shadow-2xl">
                   <img
                     src={currentService.image}
@@ -468,12 +501,10 @@ const Services: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Service Description */}
                 <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed mb-8 sm:mb-10 md:mb-12">
                   {currentService.description}
                 </p>
 
-                {/* Service Details */}
                 <div className="mb-8 sm:mb-10 md:mb-12">
                   <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 sm:mb-5 md:mb-6 flex items-center gap-2 sm:gap-3">
                     <div className="w-1.5 sm:w-2 h-6 sm:h-8 bg-teal-600 rounded-full"></div>
@@ -496,7 +527,6 @@ const Services: React.FC = () => {
                   </div>
                 </div>
 
-                {/* CTA Section */}
                 <div className="p-6 sm:p-8 md:p-10 bg-gradient-to-br from-teal-600 to-teal-700 rounded-2xl shadow-2xl text-white">
                   <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 md:mb-4">
                     Ready to Get Started?
@@ -517,7 +547,6 @@ const Services: React.FC = () => {
           </div>
         </section>
 
-        {/* Bottom CTA Section */}
         <section className="bg-gradient-to-r from-teal-700 to-teal-600 text-white py-12 sm:py-16 md:py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight">
@@ -537,7 +566,6 @@ const Services: React.FC = () => {
         </section>
       </div>
 
-      {/* Footer  */}
       <Footer />
     </div>
   );

@@ -63,24 +63,69 @@ const Navbar: React.FC = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    
+    // Close menus
     setMobileMenuOpen(false);
     setOpenDropdown(null);
     setMobileOpenDropdown(null);
 
     if (href.includes('#')) {
       const [path, hash] = href.split('#');
+      const currentPath = window.location.pathname;
       
-      if (path && path !== window.location.pathname) {
+      // Remove trailing slash from paths for comparison
+      const normalizedCurrentPath = currentPath.endsWith('/') && currentPath !== '/' 
+        ? currentPath.slice(0, -1) 
+        : currentPath;
+      const normalizedPath = path.endsWith('/') && path !== '/' 
+        ? path.slice(0, -1) 
+        : path;
+      
+      if (normalizedPath && normalizedPath !== normalizedCurrentPath) {
+        // Navigate to different page with hash
+        // Store the hash for scrolling after page load
+        sessionStorage.setItem('scrollToSection', hash);
         window.location.href = href;
       } else {
-        const element = document.getElementById(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        // Same page, smooth scroll to section
+        // Store in sessionStorage in case page needs to reload
+        sessionStorage.setItem('scrollToSection', hash);
+        scrollToSection(hash);
       }
     } else {
+      // No hash, just navigate
       window.location.href = href;
     }
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        // Calculate navbar height based on screen size
+        const isMobile = window.innerWidth < 1024;
+        const navbarHeight = isMobile ? 104 : 116;
+        
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - 20;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        // Update URL without triggering navigation
+        window.history.pushState(null, '', `#${sectionId}`);
+        
+        // Dispatch custom event to notify page components
+        window.dispatchEvent(new CustomEvent('sectionChange', { detail: { sectionId } }));
+        
+        // Clear sessionStorage after successful scroll
+        setTimeout(() => {
+          sessionStorage.removeItem('scrollToSection');
+        }, 500);
+      }
+    }, 100);
   };
 
   const toggleMobileDropdown = (label: string) => {
@@ -98,13 +143,13 @@ const Navbar: React.FC = () => {
   const handleDropdownLeave = () => {
     const timeout = setTimeout(() => {
       setOpenDropdown(null);
-    }, 300); // 300ms delay before closing
+    }, 300);
     setDropdownTimeout(timeout);
   };
 
   return (
     <>
-      {/* Top Bar - Reduced height */}
+      {/* Top Bar */}
       <div className="bg-gradient-to-r from-teal-600 to-teal-700 text-white py-1.5 sm:py-2 md:py-2.5 fixed top-0 left-0 right-0 z-50 shadow-sm">
         <div className="w-full px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-1.5 sm:gap-2 md:gap-2.5 text-xs sm:text-sm md:text-base">
@@ -155,7 +200,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Navbar - Adjusted top spacing to match reduced teal bar height */}
+      {/* Main Navbar */}
       <nav className="bg-white/98 backdrop-blur-md shadow-lg fixed top-[40px] sm:top-[44px] md:top-[48px] left-0 right-0 z-40 border-b border-gray-100">
         <div className="w-full px-4 sm:px-4 md:px-6 lg:px-12 xl:px-16">
           <div className="flex justify-between items-center h-16 sm:h-16 md:h-18 lg:h-20">
@@ -189,7 +234,7 @@ const Navbar: React.FC = () => {
               </a>
             </div>
 
-            {/* Desktop Navigation - Full Width Spread */}
+            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center justify-between flex-1 mx-8 xl:mx-16">
               {navItems.map((item) => (
                 <div 

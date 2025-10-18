@@ -96,11 +96,11 @@ const Footer: React.FC = () => {
             &copy; 2025 Springs Companions. All rights reserved.
           </p>
           <div className="flex gap-6 sm:gap-8">
-            <a href="#" className="hover:text-teal-400 transition-colors duration-200 whitespace-nowrap">
-              Privacy Policy
+            <a href="/privacy-policy" className="hover:text-teal-400 transition-colors duration-200 whitespace-nowrap">
+                Privacy Policy
             </a>
-            <a href="#" className="hover:text-teal-400 transition-colors duration-200 whitespace-nowrap">
-              Terms of Service
+            <a href="/terms-of-service" className="hover:text-teal-400 transition-colors duration-200 whitespace-nowrap">
+               Terms of Service
             </a>
           </div>
         </div>
