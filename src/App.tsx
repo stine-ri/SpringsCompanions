@@ -8,7 +8,7 @@ import Careers from './Components/Careers';
 import PrivacyPolicy from './Components/PrivacyPolicy';
 import TermsOfService from './Components/TermsOfService';
 import CookieConsent from './Components/CookieConsent';
-
+// import CaregiverTermsOfService from './Components/CaregiversTermsOfService';
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
           <Route path='/careers' element={<Careers/>}/>
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          {/* <Route path="/caregiver-terms-of-service" element={<CaregiverTermsOfService />} /> */}
         </Routes>
       </main>
       

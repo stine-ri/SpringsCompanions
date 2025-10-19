@@ -63,41 +63,41 @@ const Navbar: React.FC = () => {
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    
-    // Close menus
-    setMobileMenuOpen(false);
-    setOpenDropdown(null);
-    setMobileOpenDropdown(null);
+  e.preventDefault();
+  
+  // Close menus immediately
+  setMobileMenuOpen(false);
+  setOpenDropdown(null);
+  setMobileOpenDropdown(null);
 
-    if (href.includes('#')) {
-      const [path, hash] = href.split('#');
-      const currentPath = window.location.pathname;
-      
-      // Remove trailing slash from paths for comparison
-      const normalizedCurrentPath = currentPath.endsWith('/') && currentPath !== '/' 
-        ? currentPath.slice(0, -1) 
-        : currentPath;
-      const normalizedPath = path.endsWith('/') && path !== '/' 
-        ? path.slice(0, -1) 
-        : path;
-      
-      if (normalizedPath && normalizedPath !== normalizedCurrentPath) {
-        // Navigate to different page with hash
-        // Store the hash for scrolling after page load
-        sessionStorage.setItem('scrollToSection', hash);
-        window.location.href = href;
-      } else {
-        // Same page, smooth scroll to section
-        // Store in sessionStorage in case page needs to reload
-        sessionStorage.setItem('scrollToSection', hash);
-        scrollToSection(hash);
-      }
+  if (href.includes('#')) {
+    const [path, hash] = href.split('#');
+    const currentPath = window.location.pathname;
+    
+    // Normalize paths for comparison
+    const normalizedCurrentPath = currentPath.endsWith('/') && currentPath !== '/' 
+      ? currentPath.slice(0, -1) 
+      : currentPath;
+    const normalizedPath = path.endsWith('/') && path !== '/' 
+      ? path.slice(0, -1) 
+      : path;
+    
+    // Check if same page
+    const isSamePage = normalizedPath === '' || normalizedPath === normalizedCurrentPath;
+    
+    if (isSamePage) {
+      // Same page - use native hash navigation which triggers hashchange event
+      window.location.hash = hash;
     } else {
-      // No hash, just navigate
+      // Different page - use sessionStorage for post-navigation scroll
+      sessionStorage.setItem('scrollToSection', hash);
       window.location.href = href;
     }
-  };
+  } else {
+    // No hash
+    window.location.href = href;
+  }
+};
 
   const scrollToSection = (sectionId: string) => {
     setTimeout(() => {

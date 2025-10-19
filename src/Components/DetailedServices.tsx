@@ -197,48 +197,39 @@ const Services: React.FC = () => {
     }
   ];
 
-  useEffect(() => {
-    // Check for hash in URL on mount
+useEffect(() => {
+  const handleNavigation = () => {
+    // Get hash from URL
     const hash = window.location.hash.replace('#', '');
     
-    // Check sessionStorage for scroll target (from navbar navigation)
-    const scrollTarget = sessionStorage.getItem('scrollToSection');
+    // Check sessionStorage (from navbar on different page)
+    const scrollTarget = sessionStorage.getItem('scrollToSection') || hash;
     
     if (scrollTarget) {
-      // Remove from sessionStorage
-      sessionStorage.removeItem('scrollToSection');
-      
-      // Set active service
-      if (services.find(s => s.id === scrollTarget)) {
+      // Find the service
+      const targetService = services.find(s => s.id === scrollTarget);
+      if (targetService) {
         setActiveService(scrollTarget);
+        sessionStorage.removeItem('scrollToSection');
+        
+        // Scroll after state updates
+        setTimeout(() => {
+          scrollToSection(scrollTarget);
+        }, 100);
       }
-      
-      // Scroll to section after a short delay to ensure page is loaded
-      setTimeout(() => {
-        scrollToSection(scrollTarget);
-      }, 300);
-    } else if (hash && services.find(s => s.id === hash)) {
-      // Handle direct hash navigation
-      setActiveService(hash);
-      setTimeout(() => {
-        scrollToSection(hash);
-      }, 300);
     }
+  };
 
-    // Listen for section change events from navbar
-    const handleSectionChange = (e: CustomEvent) => {
-      const { sectionId } = e.detail;
-      if (services.find(s => s.id === sectionId)) {
-        setActiveService(sectionId);
-      }
-    };
+  // Initial load
+  handleNavigation();
 
-    window.addEventListener('sectionChange', handleSectionChange as EventListener);
+  // Listen for hash changes (triggered by navbar clicks on same page)
+  window.addEventListener('hashchange', handleNavigation);
 
-    return () => {
-      window.removeEventListener('sectionChange', handleSectionChange as EventListener);
-    };
-  }, []);
+  return () => {
+    window.removeEventListener('hashchange', handleNavigation);
+  };
+}, [services]);
 
   const scrollToSection = (serviceId: string) => {
     const element = document.getElementById(serviceId);
