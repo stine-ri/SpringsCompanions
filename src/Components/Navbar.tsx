@@ -99,36 +99,6 @@ const Navbar: React.FC = () => {
   }
 };
 
-  const scrollToSection = (sectionId: string) => {
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        // Calculate navbar height based on screen size
-        const isMobile = window.innerWidth < 1024;
-        const navbarHeight = isMobile ? 104 : 116;
-        
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - 20;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-
-        // Update URL without triggering navigation
-        window.history.pushState(null, '', `#${sectionId}`);
-        
-        // Dispatch custom event to notify page components
-        window.dispatchEvent(new CustomEvent('sectionChange', { detail: { sectionId } }));
-        
-        // Clear sessionStorage after successful scroll
-        setTimeout(() => {
-          sessionStorage.removeItem('scrollToSection');
-        }, 500);
-      }
-    }, 100);
-  };
-
   const toggleMobileDropdown = (label: string) => {
     setMobileOpenDropdown(mobileOpenDropdown === label ? null : label);
   };
