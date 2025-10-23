@@ -43,7 +43,7 @@ const CaregiverApplication: React.FC = () => {
 
   const [touched, setTouched] = useState<ValidationState>({});
   const [errors, setErrors] = useState<ValidationState>({});
-
+const [showSubmitModal, setShowSubmitModal] = useState(false);
   // Validation functions
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -119,45 +119,84 @@ const CaregiverApplication: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Mark all fields as touched
-    const allFields = Object.keys(formData);
-    const touchedState: ValidationState = {};
-    const errorState: ValidationState = {};
+  // Mark all fields as touched
+  const allFields = Object.keys(formData);
+  const touchedState: ValidationState = {};
+  const errorState: ValidationState = {};
 
-    allFields.forEach(field => {
-      touchedState[field] = true;
-      errorState[field] = !validateField(field, formData[field as keyof FormData]);
-    });
+  allFields.forEach(field => {
+    touchedState[field] = true;
+    errorState[field] = !validateField(field, formData[field as keyof FormData]);
+  });
 
-    setTouched(touchedState);
-    setErrors(errorState);
+  setTouched(touchedState);
+  setErrors(errorState);
 
-    if (!isFormValid()) {
-      alert('Please fill in all required fields correctly.');
-      return;
-    }
+  if (!isFormValid()) {
+    alert('Please fill in all required fields correctly.');
+    return;
+  }
 
-    // Create WhatsApp message
-    const message = `*New Caregiver Application - Springs Companions*\n\n` +
-      `*Name:* ${formData.firstName} ${formData.lastName}\n` +
-      `*Preferred Name:* ${formData.preferredName || 'N/A'}\n` +
-      `*Address:* ${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}\n` +
-      `*Phone:* ${formData.phone}\n` +
-      `*Email:* ${formData.email}\n` +
-      `*CNA #:* ${formData.cnaNumber}\n` +
-      `*Years Experience:* ${formData.yearsExperience}\n` +
-      `*How They Heard:* ${formData.howDidYouHear}\n` +
-      `*About:* ${formData.aboutYou || 'N/A'}`;
+  // Show submission modal
+  setShowSubmitModal(true);
+};
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/18174496668?text=${encodedMessage}`;
+const sendViaWhatsApp = () => {
+  const whatsappMessage = `*New Caregiver Application - Springs Companions*\n\n` +
+    `*Name:* ${formData.firstName} ${formData.lastName}\n` +
+    `*Preferred Name:* ${formData.preferredName || 'N/A'}\n` +
+    `*Address:* ${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}\n` +
+    `*Phone:* ${formData.phone}\n` +
+    `*Email:* ${formData.email}\n` +
+    `*CNA #:* ${formData.cnaNumber}\n` +
+    `*Years Experience:* ${formData.yearsExperience}\n` +
+    `*How They Heard:* ${formData.howDidYouHear}\n` +
+    `*About:* ${formData.aboutYou || 'N/A'}`;
 
-    // Open WhatsApp in new tab
-    window.open(whatsappUrl, '_blank');
-  };
+  const encodedWhatsappMessage = encodeURIComponent(whatsappMessage);
+  const whatsappUrl = `https://wa.me/18174496668?text=${encodedWhatsappMessage}`;
+  window.open(whatsappUrl, '_blank');
+};
+
+const sendViaEmail = () => {
+  const emailSubject = `New Caregiver Application - ${formData.firstName} ${formData.lastName}`;
+  const emailBody = `New Caregiver Application - Springs Companions\n\n` +
+    `APPLICANT INFORMATION\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+    `Name: ${formData.firstName} ${formData.lastName}\n` +
+    `Preferred Name: ${formData.preferredName || 'N/A'}\n\n` +
+    `CONTACT INFORMATION\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+    `Address: ${formData.address}\n` +
+    `City: ${formData.city}\n` +
+    `State: ${formData.state}\n` +
+    `ZIP: ${formData.zip}\n` +
+    `Phone: ${formData.phone}\n` +
+    `Email: ${formData.email}\n\n` +
+    `PROFESSIONAL INFORMATION\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+    `CNA Number: ${formData.cnaNumber}\n` +
+    `Years of Experience: ${formData.yearsExperience}\n` +
+    `How They Heard About Us: ${formData.howDidYouHear}\n\n` +
+    `ADDITIONAL INFORMATION\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+    `${formData.aboutYou || 'N/A'}\n\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+    `Submitted via Springs Companions Online Application`;
+
+  const encodedEmailSubject = encodeURIComponent(emailSubject);
+  const encodedEmailBody = encodeURIComponent(emailBody);
+  const emailUrl = `mailto:info@springscompanions.com?subject=${encodedEmailSubject}&body=${encodedEmailBody}`;
+  window.location.href = emailUrl;
+};
+
+const sendViaBoth = () => {
+  sendViaWhatsApp();
+  setTimeout(() => sendViaEmail(), 500);
+};
 
   const ValidationIcon: React.FC<{ status: 'valid' | 'invalid' | 'neutral' }> = ({ status }) => {
     if (status === 'valid') {
@@ -350,375 +389,453 @@ const CaregiverApplication: React.FC = () => {
 
   // Application Form View
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
+  <div className="min-h-screen flex flex-col bg-gray-50">
+    <Navbar />
 
-      {/* Form Header */}
-      <div className="pt-[140px] sm:pt-[150px] relative bg-gradient-to-r from-teal-50 to-teal-100 py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-teal-900">ONLINE APPLICATION</h1>
-        </div>
+    {/* Form Header */}
+    <div className="pt-[140px] sm:pt-[150px] relative bg-gradient-to-r from-teal-50 to-teal-100 py-12 sm:py-16 px-4">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-900">
+          ONLINE APPLICATION
+        </h1>
       </div>
+    </div>
 
-      {/* Form Content */}
-      <div className="flex-grow py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-teal-900 mb-8">
-            Springs Companions Employment Inquiry
-          </h2>
+    {/* Form Content */}
+    <div className="flex-grow py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-6 md:p-10">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-teal-900 mb-6 sm:mb-8">
+          Springs Companions Employment Inquiry
+        </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  First Name <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('firstName') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('firstName') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('firstName')} />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Last Name <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('lastName') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('lastName') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('lastName')} />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Preferred Name */}
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+          {/* Name Fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Preferred Name
-              </label>
-              <input
-                type="text"
-                name="preferredName"
-                value={formData.preferredName}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-              />
-            </div>
-
-            {/* Address Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Address <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('address') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('address') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('address')} />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  City <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('city') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('city') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('city')} />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  State <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="state"
-                    value={formData.state}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    maxLength={2}
-                    placeholder="TX"
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('state') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('state') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('state')} />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Zip <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="zip"
-                    value={formData.zip}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="12345"
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('zip') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('zip') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('zip')} />
-                  </div>
-                </div>
-                {touched.zip && errors.zip && (
-                  <p className="mt-1 text-sm text-red-500">Please enter a valid ZIP code</p>
-                )}
-              </div>
-            </div>
-
-            {/* Contact Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="(123) 456-7890"
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('phone') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('phone') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('phone')} />
-                  </div>
-                </div>
-                {touched.phone && errors.phone && (
-                  <p className="mt-1 text-sm text-red-500">Please enter a valid phone number</p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="your.email@example.com"
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('email') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('email') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('email')} />
-                  </div>
-                </div>
-                {touched.email && errors.email && (
-                  <p className="mt-1 text-sm text-red-500">Please enter a valid email address</p>
-                )}
-              </div>
-            </div>
-
-            {/* CNA and Experience */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  CNA # <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="cnaNumber"
-                    value={formData.cnaNumber}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="CN"
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                      getFieldStatus('cnaNumber') === 'invalid'
-                        ? 'border-red-500 focus:ring-red-500'
-                        : getFieldStatus('cnaNumber') === 'valid'
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 focus:ring-teal-500'
-                    }`}
-                  />
-                  <div className="absolute right-3 top-3.5">
-                    <ValidationIcon status={getFieldStatus('cnaNumber')} />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Years Experience <span className="text-red-500">*</span>
-                </label>
-                <select
-                  name="yearsExperience"
-                  value={formData.yearsExperience}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"
-                >
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6-10">6-10</option>
-                  <option value="10+">10+</option>
-                </select>
-              </div>
-            </div>
-
-            {/* How Did You Hear */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                How Did You Hear About Us <span className="text-red-500">*</span>
+                First Name <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <input
                   type="text"
-                  name="howDidYouHear"
-                  value={formData.howDidYouHear}
+                  name="firstName"
+                  value={formData.firstName}
                   onChange={handleInputChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                    getFieldStatus('howDidYouHear') === 'invalid'
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('firstName') === 'invalid'
                       ? 'border-red-500 focus:ring-red-500'
-                      : getFieldStatus('howDidYouHear') === 'valid'
+                      : getFieldStatus('firstName') === 'valid'
                       ? 'border-green-500 focus:ring-green-500'
                       : 'border-gray-300 focus:ring-teal-500'
                   }`}
                 />
-                <div className="absolute right-3 top-3.5">
-                  <ValidationIcon status={getFieldStatus('howDidYouHear')} />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('firstName')} />
                 </div>
               </div>
             </div>
 
-            {/* About You */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                What should Springs Companions know about you?
+                Last Name <span className="text-red-500">*</span>
               </label>
-              <textarea
-                name="aboutYou"
-                value={formData.aboutYou}
-                onChange={handleInputChange}
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="Tell us about yourself, your experience, and why you'd like to work with us..."
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('lastName') === 'invalid'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : getFieldStatus('lastName') === 'valid'
+                      ? 'border-green-500 focus:ring-green-500'
+                      : 'border-gray-300 focus:ring-teal-500'
+                  }`}
+                />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('lastName')} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Preferred Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Preferred Name
+            </label>
+            <input
+              type="text"
+              name="preferredName"
+              value={formData.preferredName}
+              onChange={handleInputChange}
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm sm:text-base"
+            />
+          </div>
+
+          {/* Address Fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Address <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('address') === 'invalid'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : getFieldStatus('address') === 'valid'
+                      ? 'border-green-500 focus:ring-green-500'
+                      : 'border-gray-300 focus:ring-teal-500'
+                  }`}
+                />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('address')} />
+                </div>
+              </div>
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <button
-                type="button"
-                onClick={() => setShowForm(false)}
-                className="flex-1 px-6 py-3 border-2 border-teal-700 text-teal-700 font-semibold rounded-lg hover:bg-teal-50 transition duration-300"
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                City <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('city') === 'invalid'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : getFieldStatus('city') === 'valid'
+                      ? 'border-green-500 focus:ring-green-500'
+                      : 'border-gray-300 focus:ring-teal-500'
+                  }`}
+                />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('city')} />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                State <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  maxLength={2}
+                  placeholder="TX"
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('state') === 'invalid'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : getFieldStatus('state') === 'valid'
+                      ? 'border-green-500 focus:ring-green-500'
+                      : 'border-gray-300 focus:ring-teal-500'
+                  }`}
+                />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('state')} />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Zip <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  name="zip"
+                  value={formData.zip}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="12345"
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('zip') === 'invalid'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : getFieldStatus('zip') === 'valid'
+                      ? 'border-green-500 focus:ring-green-500'
+                      : 'border-gray-300 focus:ring-teal-500'
+                  }`}
+                />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('zip')} />
+                </div>
+              </div>
+              {touched.zip && errors.zip && (
+                <p className="mt-1 text-xs sm:text-sm text-red-500">Please enter a valid ZIP code</p>
+              )}
+            </div>
+          </div>
+
+          {/* Contact Fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Phone <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="(123) 456-7890"
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('phone') === 'invalid'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : getFieldStatus('phone') === 'valid'
+                      ? 'border-green-500 focus:ring-green-500'
+                      : 'border-gray-300 focus:ring-teal-500'
+                  }`}
+                />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('phone')} />
+                </div>
+              </div>
+              {touched.phone && errors.phone && (
+                <p className="mt-1 text-xs sm:text-sm text-red-500">Please enter a valid phone number</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="your.email@example.com"
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('email') === 'invalid'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : getFieldStatus('email') === 'valid'
+                      ? 'border-green-500 focus:ring-green-500'
+                      : 'border-gray-300 focus:ring-teal-500'
+                  }`}
+                />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('email')} />
+                </div>
+              </div>
+              {touched.email && errors.email && (
+                <p className="mt-1 text-xs sm:text-sm text-red-500">Please enter a valid email address</p>
+              )}
+            </div>
+          </div>
+
+          {/* CNA and Experience */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                CNA # <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  name="cnaNumber"
+                  value={formData.cnaNumber}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="CN"
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                    getFieldStatus('cnaNumber') === 'invalid'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : getFieldStatus('cnaNumber') === 'valid'
+                      ? 'border-green-500 focus:ring-green-500'
+                      : 'border-gray-300 focus:ring-teal-500'
+                  }`}
+                />
+                <div className="absolute right-3 top-2.5 sm:top-3.5">
+                  <ValidationIcon status={getFieldStatus('cnaNumber')} />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Years Experience <span className="text-red-500">*</span>
+              </label>
+              <select
+                name="yearsExperience"
+                value={formData.yearsExperience}
+                onChange={handleInputChange}
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white text-sm sm:text-base"
               >
-                Back
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6-10">6-10</option>
+                <option value="10+">10+</option>
+              </select>
+            </div>
+          </div>
+
+          {/* How Did You Hear */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              How Did You Hear About Us <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                name="howDidYouHear"
+                value={formData.howDidYouHear}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+                  getFieldStatus('howDidYouHear') === 'invalid'
+                    ? 'border-red-500 focus:ring-red-500'
+                    : getFieldStatus('howDidYouHear') === 'valid'
+                    ? 'border-green-500 focus:ring-green-500'
+                    : 'border-gray-300 focus:ring-teal-500'
+                }`}
+              />
+              <div className="absolute right-3 top-2.5 sm:top-3.5">
+                <ValidationIcon status={getFieldStatus('howDidYouHear')} />
+              </div>
+            </div>
+          </div>
+
+          {/* About You */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              What should Springs Companions know about you?
+            </label>
+            <textarea
+              name="aboutYou"
+              value={formData.aboutYou}
+              onChange={handleInputChange}
+              rows={4}
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm sm:text-base"
+              placeholder="Tell us about yourself, your experience, and why you'd like to work with us..."
+            />
+          </div>
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6">
+            <button
+              type="button"
+              onClick={() => setShowForm(false)}
+              className="flex-1 px-4 sm:px-6 py-2.5 sm:py-3 border-2 border-teal-700 text-teal-700 font-semibold rounded-lg hover:bg-teal-50 transition duration-300 text-sm sm:text-base"
+            >
+              Back
+            </button>
+            <button
+              type="submit"
+              className="flex-1 bg-teal-700 hover:bg-teal-600 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm sm:text-base"
+            >
+              Submit Application
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {/* Submission Modal */}
+    {showSubmitModal && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-5 sm:p-6 md:p-8">
+          <div className="text-center mb-5 sm:mb-6">
+            <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 bg-teal-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+              <Check className="w-7 h-7 sm:w-8 sm:h-8 text-teal-700" />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+              Application Ready!
+            </h3>
+            <p className="text-sm sm:text-base text-gray-600">
+              Choose how you'd like to send your application to Springs Companions
+            </p>
+          </div>
+
+          <div className="space-y-3 mb-5 sm:mb-6">
+            {/* Both Option - Emphasized */}
+            <button
+              onClick={() => {
+                sendViaBoth();
+                setShowSubmitModal(false);
+              }}
+              className="w-full bg-gradient-to-r from-teal-700 to-teal-600 hover:from-teal-600 hover:to-teal-500 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg relative overflow-hidden group"
+            >
+              <div className="absolute top-0 right-0 bg-yellow-400 text-teal-900 text-xs font-bold px-2 sm:px-3 py-1 rounded-bl-lg">
+                RECOMMENDED
+              </div>
+              <div className="flex items-center justify-center space-x-2 mt-2">
+                <span className="text-lg sm:text-xl">📧</span>
+                <span className="text-lg sm:text-xl">📱</span>
+                <span className="text-sm sm:text-base">Send via Both</span>
+              </div>
+              <p className="text-teal-100 text-xs mt-1">Fastest response time</p>
+            </button>
+
+            {/* Individual Options */}
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => {
+                  sendViaEmail();
+                  setShowSubmitModal(false);
+                }}
+                className="border-2 border-teal-700 text-teal-700 hover:bg-teal-50 font-semibold py-3 px-3 sm:px-4 rounded-lg transition duration-300"
+              >
+                <div className="flex flex-col items-center space-y-1">
+                  <span className="text-xl sm:text-2xl">📧</span>
+                  <span className="text-xs sm:text-sm">Email Only</span>
+                </div>
               </button>
+
               <button
-                type="submit"
-                className="flex-1 bg-teal-700 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                onClick={() => {
+                  sendViaWhatsApp();
+                  setShowSubmitModal(false);
+                }}
+                className="border-2 border-teal-700 text-teal-700 hover:bg-teal-50 font-semibold py-3 px-3 sm:px-4 rounded-lg transition duration-300"
               >
-                Submit Application
+                <div className="flex flex-col items-center space-y-1">
+                  <span className="text-xl sm:text-2xl">📱</span>
+                  <span className="text-xs sm:text-sm">WhatsApp Only</span>
+                </div>
               </button>
             </div>
-          </form>
+          </div>
+
+          <button
+            onClick={() => setShowSubmitModal(false)}
+            className="w-full text-gray-500 hover:text-gray-700 font-medium py-2 transition duration-300 text-sm sm:text-base"
+          >
+            Cancel
+          </button>
         </div>
       </div>
+    )}
 
-      <Footer />
-    </div>
-  );
+    <Footer />
+  </div>
+);
 };
 
 export default CaregiverApplication;

@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
 
   const contactInfo = {
     phone: '8174496668',
-    phoneDisplay: '(817) 449-6668',
+    phoneDisplay: '+1 (817) 449-6668',
     additionalPhone: '+14699655019',
     additionalPhoneDisplay: '+1 (469) 965-5019',
     email: 'info@springscompanions.com',

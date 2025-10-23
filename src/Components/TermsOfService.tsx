@@ -1296,7 +1296,7 @@ const TermsOfService: React.FC = () => {
               <div>
                 <p className="font-semibold">Phone:</p>
                 <a href="tel:+18174496668" className="text-teal-100 hover:text-white transition-colors">
-                  (817) 449-6668
+                 (817) 449-6668 OR  +1(469)9655019
                 </a>
               </div>
             </div>

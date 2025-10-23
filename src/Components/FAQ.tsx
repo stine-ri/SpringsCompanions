@@ -144,11 +144,11 @@ const FAQ = () => {
             </p>
             <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 justify-center">
               <a
-                href="tel:8174496668"
+                href="tel:+18174496668"
                 className="bg-white text-teal-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-gray-100 transition-all font-bold text-sm sm:text-base shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2 sm:gap-3"
               >
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-                Call Us: (817) 449-6668
+                Call Us: +1 (817) 449-6668 OR  +1(469)9655019
               </a>
               <a
                 href="/contact"

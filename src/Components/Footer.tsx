@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 flex-shrink-0" />
                 <a href="tel:8174496668" className="hover:text-teal-400 transition-colors duration-200 break-all">
-                  (817) 449-6668
+                  +1 (817) 449-6668 OR  +1(469)9655019
                 </a>
               </li>
               <li className="flex items-center gap-3">
