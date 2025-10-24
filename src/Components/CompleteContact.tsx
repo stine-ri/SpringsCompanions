@@ -282,7 +282,7 @@ ${formData.message}
                       </a>
                       <p className="text-sm sm:text-base font-semibold text-gray-700 mb-1 mt-2">Alternative Number:</p>
                       <a href={`tel:${alternativeNumber}`} className="text-lg sm:text-xl text-teal-600 hover:text-teal-700 font-bold">
-                        +1 469 965 5019
+                      +1 (817) 374 6460
                       </a>
                     </div>
                   </div>
